@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
@@ -44,67 +44,44 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
-
+@Sampled
 @Composable
 fun MenuSample() {
     var expanded by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.TopStart)
-    ) {
+    Box(modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.TopStart)) {
         IconButton(onClick = { expanded = true }) {
             Icon(Icons.Default.MoreVert, contentDescription = "Localized description")
         }
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             DropdownMenuItem(
                 text = { Text("Edit") },
                 onClick = { /* Handle edit! */ },
-                leadingIcon = {
-                    Icon(
-                        Icons.Outlined.Edit,
-                        contentDescription = null
-                    )
-                })
+                leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) }
+            )
             DropdownMenuItem(
                 text = { Text("Settings") },
                 onClick = { /* Handle settings! */ },
-                leadingIcon = {
-                    Icon(
-                        Icons.Outlined.Settings,
-                        contentDescription = null
-                    )
-                })
+                leadingIcon = { Icon(Icons.Outlined.Settings, contentDescription = null) }
+            )
             HorizontalDivider()
             DropdownMenuItem(
                 text = { Text("Send Feedback") },
                 onClick = { /* Handle send feedback! */ },
-                leadingIcon = {
-                    Icon(
-                        Icons.Outlined.Email,
-                        contentDescription = null
-                    )
-                },
-                trailingIcon = { Text("F11", textAlign = TextAlign.Center) })
+                leadingIcon = { Icon(Icons.Outlined.Email, contentDescription = null) },
+                trailingIcon = { Text("F11", textAlign = TextAlign.Center) }
+            )
         }
     }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun MenuWithScrollStateSample() {
     var expanded by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.TopStart)
-    ) {
+    Box(modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.TopStart)) {
         IconButton(onClick = { expanded = true }) {
             Icon(Icons.Default.MoreVert, contentDescription = "Localized description")
         }
@@ -117,12 +94,8 @@ fun MenuWithScrollStateSample() {
                 DropdownMenuItem(
                     text = { Text("Item ${it + 1}") },
                     onClick = { /* TODO */ },
-                    leadingIcon = {
-                        Icon(
-                            Icons.Outlined.Edit,
-                            contentDescription = null
-                        )
-                    })
+                    leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) }
+                )
             }
         }
         LaunchedEffect(expanded) {

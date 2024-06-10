@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -34,42 +34,42 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
-
+@Sampled
 @Composable
 fun ButtonSample() {
     Button(onClick = { /* Do something! */ }) { Text("Button") }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ElevatedButtonSample() {
     ElevatedButton(onClick = { /* Do something! */ }) { Text("Elevated Button") }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun FilledTonalButtonSample() {
     FilledTonalButton(onClick = { /* Do something! */ }) { Text("Filled Tonal Button") }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun OutlinedButtonSample() {
     OutlinedButton(onClick = { /* Do something! */ }) { Text("Outlined Button") }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun TextButtonSample() {
     TextButton(onClick = { /* Do something! */ }) { Text("Text Button") }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ButtonWithIconSample() {
     Button(

@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -31,70 +31,64 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Preview
-
+@Sampled
 @Composable
 fun CardSample() {
     Card(Modifier.size(width = 180.dp, height = 100.dp)) {
-        // Card content
+        Box(Modifier.fillMaxSize()) { Text("Card content", Modifier.align(Alignment.Center)) }
     }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ClickableCardSample() {
     Card(
         onClick = { /* Do something */ },
         modifier = Modifier.size(width = 180.dp, height = 100.dp)
     ) {
-        Box(Modifier.fillMaxSize()) {
-            Text("Clickable", Modifier.align(Alignment.Center))
-        }
+        Box(Modifier.fillMaxSize()) { Text("Clickable", Modifier.align(Alignment.Center)) }
     }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ElevatedCardSample() {
     ElevatedCard(Modifier.size(width = 180.dp, height = 100.dp)) {
-        // Card content
+        Box(Modifier.fillMaxSize()) { Text("Card content", Modifier.align(Alignment.Center)) }
     }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ClickableElevatedCardSample() {
     ElevatedCard(
         onClick = { /* Do something */ },
         modifier = Modifier.size(width = 180.dp, height = 100.dp)
     ) {
-        Box(Modifier.fillMaxSize()) {
-            Text("Clickable", Modifier.align(Alignment.Center))
-        }
+        Box(Modifier.fillMaxSize()) { Text("Clickable", Modifier.align(Alignment.Center)) }
     }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun OutlinedCardSample() {
     OutlinedCard(Modifier.size(width = 180.dp, height = 100.dp)) {
-        // Card content
+        Box(Modifier.fillMaxSize()) { Text("Card content", Modifier.align(Alignment.Center)) }
     }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ClickableOutlinedCardSample() {
     OutlinedCard(
         onClick = { /* Do something */ },
         modifier = Modifier.size(width = 180.dp, height = 100.dp)
     ) {
-        Box(Modifier.fillMaxSize()) {
-            Text("Clickable", Modifier.align(Alignment.Center))
-        }
+        Box(Modifier.fillMaxSize()) { Text("Clickable", Modifier.align(Alignment.Center)) }
     }
 }

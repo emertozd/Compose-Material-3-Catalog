@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -36,12 +37,9 @@ import com.emertozd.compose.catalog.model.Specification
 @Composable
 fun SpecificationItem(
     specification: Specification,
-    onClick: (specification: Specification) -> Unit,
+    onClick: (specification: Specification) -> Unit
 ) {
-    OutlinedCard(
-        onClick = { onClick(specification) },
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    OutlinedCard(onClick = { onClick(specification) }, modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.padding(SpecificationItemPadding),
             horizontalArrangement = Arrangement.spacedBy(SpecificationItemPadding),
@@ -51,17 +49,14 @@ fun SpecificationItem(
                 modifier = Modifier.weight(1f, fill = true),
                 verticalArrangement = Arrangement.spacedBy(SpecificationItemTextPadding)
             ) {
-                Text(
-                    text = specification.name,
-                    style = MaterialTheme.typography.titleSmall
-                )
+                Text(text = specification.name, style = MaterialTheme.typography.titleSmall)
                 Text(
                     text = specification.artifact,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
             Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
+                imageVector = Icons.AutoMirrored.Default.KeyboardArrowRight,
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )

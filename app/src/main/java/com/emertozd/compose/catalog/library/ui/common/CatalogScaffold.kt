@@ -17,11 +17,19 @@
 package com.emertozd.compose.catalog.library.ui.common
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import com.emertozd.compose.catalog.library.model.Theme
 import com.emertozd.compose.catalog.library.ui.theme.ThemePicker
 import com.emertozd.compose.catalog.library.util.GuidelinesUrl
@@ -32,17 +40,6 @@ import com.emertozd.compose.catalog.library.util.ReleasesUrl
 import com.emertozd.compose.catalog.library.util.SourceUrl
 import com.emertozd.compose.catalog.library.util.TermsUrl
 import com.emertozd.compose.catalog.library.util.openUrl
-import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,55 +60,42 @@ fun CatalogScaffold(
     onFavoriteClick: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val context = LocalContext.current
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val sheetState = rememberModalBottomSheetState()
-    var openThemePicker by rememberSaveable { mutableStateOf(false) }
+  val context = LocalContext.current
+  val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+  val sheetState = rememberModalBottomSheetState()
+  var openThemePicker by rememberSaveable { mutableStateOf(false) }
 
-    Scaffold(
-        topBar = {
-            CatalogTopAppBar(
-                title = topBarTitle,
-                showBackNavigationIcon = showBackNavigationIcon,
-                scrollBehavior = scrollBehavior,
-                onBackClick = onBackClick,
-                favorite = favorite,
-                onFavoriteClick = onFavoriteClick,
-                onThemeClick = { openThemePicker = true },
-                onGuidelinesClick = { context.openUrl(guidelinesUrl) },
-                onDocsClick = { context.openUrl(docsUrl) },
-                onSourceClick = { context.openUrl(sourceUrl) },
-                onIssueClick = { context.openUrl(issueUrl) },
-                onTermsClick = { context.openUrl(termsUrl) },
-                onPrivacyClick = { context.openUrl(privacyUrl) },
-                onLicensesClick = { context.openUrl(licensesUrl) }
-            )
+  Scaffold(
+      topBar = {
+        CatalogTopAppBar(
+            title = topBarTitle,
+            showBackNavigationIcon = showBackNavigationIcon,
+            scrollBehavior = scrollBehavior,
+            onBackClick = onBackClick,
+            favorite = favorite,
+            onFavoriteClick = onFavoriteClick,
+            onThemeClick = { openThemePicker = true },
+            onGuidelinesClick = { context.openUrl(guidelinesUrl) },
+            onDocsClick = { context.openUrl(docsUrl) },
+            onSourceClick = { context.openUrl(sourceUrl) },
+            onIssueClick = { context.openUrl(issueUrl) },
+            onTermsClick = { context.openUrl(termsUrl) },
+            onPrivacyClick = { context.openUrl(privacyUrl) },
+            onLicensesClick = { context.openUrl(licensesUrl) })
+      },
+      modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+      content = content)
+
+  if (openThemePicker) {
+    ModalBottomSheet(
+        onDismissRequest = { openThemePicker = false },
+        sheetState = sheetState,
+        content = {
+          ThemePicker(
+              theme = theme,
+              onThemeChange = onThemeChange,
+          )
         },
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        content = content
     )
-
-    if (openThemePicker) {
-        ModalBottomSheet(
-            onDismissRequest = { openThemePicker = false },
-            sheetState = sheetState,
-            windowInsets = WindowInsets(0),
-            content = {
-                ThemePicker(
-                    theme = theme,
-                    onThemeChange = { theme ->
-                        coroutineScope.launch {
-                            sheetState.hide()
-                            onThemeChange(theme)
-                        }.invokeOnCompletion {
-                            if (!sheetState.isVisible) {
-                                openThemePicker = false
-                            }
-                        }
-                    }
-                )
-            },
-        )
-    }
+  }
 }

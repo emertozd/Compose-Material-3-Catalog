@@ -16,79 +16,48 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxDefaults
-import androidx.compose.material3.SwipeToDismissState
-import androidx.compose.material3.SwipeToDismissState.Companion.Saver
-import androidx.compose.material3.SwipeToDismissValue
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
-
+@Sampled
 @Composable
-@ExperimentalMaterial3Api
 fun SwipeToDismissListItems() {
     val dismissState = rememberSwipeToDismissBoxState()
     SwipeToDismissBox(
         state = dismissState,
         backgroundContent = {
-            val color by animateColorAsState(
-                when (dismissState.targetValue) {
-                    SwipeToDismissValue.Settled -> Color.LightGray
-                    SwipeToDismissValue.StartToEnd -> Color.Green
-                    SwipeToDismissValue.EndToStart -> Color.Red
-                }
-            )
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .background(color))
+            val color by
+                animateColorAsState(
+                    when (dismissState.targetValue) {
+                        SwipeToDismissBoxValue.Settled -> Color.LightGray
+                        SwipeToDismissBoxValue.StartToEnd -> Color.Green
+                        SwipeToDismissBoxValue.EndToStart -> Color.Red
+                    }
+                )
+            Box(Modifier.fillMaxSize().background(color))
         }
     ) {
-        Card {
+        OutlinedCard(shape = RectangleShape) {
             ListItem(
-                headlineContent = {
-                    Text("Cupcake")
-                },
+                headlineContent = { Text("Cupcake") },
                 supportingContent = { Text("Swipe me left or right!") }
             )
-            HorizontalDivider()
         }
-    }
-}
-
-@Composable
-@ExperimentalMaterial3Api
-fun rememberSwipeToDismissBoxState(
-    initialValue: SwipeToDismissValue = SwipeToDismissValue.Settled,
-    confirmValueChange: (SwipeToDismissValue) -> Boolean = { true },
-    positionalThreshold: (totalDistance: Float) -> Float =
-        SwipeToDismissBoxDefaults.positionalThreshold,
-): SwipeToDismissState {
-    val density = LocalDensity.current
-    return rememberSaveable(
-        saver = Saver(
-            confirmValueChange = confirmValueChange,
-            density = density,
-            positionalThreshold = positionalThreshold
-        )
-    ) {
-        SwipeToDismissState(initialValue, density, confirmValueChange, positionalThreshold)
     }
 }

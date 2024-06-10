@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,16 +29,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
-
+@Sampled
 @Composable
 fun SurfaceSample() {
-    Surface {
-        Text("Text on Surface")
-    }
+    Surface { Text("Text on Surface") }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ClickableSurfaceSample() {
     var count by remember { mutableStateOf(0) }
@@ -50,7 +48,7 @@ fun ClickableSurfaceSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun SelectableSurfaceSample() {
     var selected by remember { mutableStateOf(false) }
@@ -58,30 +56,25 @@ fun SelectableSurfaceSample() {
         selected = selected,
         onClick = { selected = !selected },
     ) {
-        Text(
-            text = if (selected) "Selected" else "Not Selected",
-            textAlign = TextAlign.Center
-        )
+        Text(text = if (selected) "Selected" else "Not Selected", textAlign = TextAlign.Center)
     }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ToggleableSurfaceSample() {
     var checked by remember { mutableStateOf(false) }
     Surface(
         checked = checked,
         onCheckedChange = { checked = !checked },
-        color = if (checked) {
-            MaterialTheme.colorScheme.surfaceVariant
-        } else {
-            MaterialTheme.colorScheme.surface
-        }
+        color =
+            if (checked) {
+                MaterialTheme.colorScheme.surfaceVariant
+            } else {
+                MaterialTheme.colorScheme.surface
+            }
     ) {
-        Text(
-            text = if (checked) "ON" else "OFF",
-            textAlign = TextAlign.Center
-        )
+        Text(text = if (checked) "ON" else "OFF", textAlign = TextAlign.Center)
     }
 }

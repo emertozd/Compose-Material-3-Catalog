@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -28,7 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
-
+@Sampled
 @Composable
 fun OneLineListItem() {
     Column {
@@ -46,7 +46,7 @@ fun OneLineListItem() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun TwoLineListItem() {
     Column {
@@ -66,7 +66,7 @@ fun TwoLineListItem() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ThreeLineListItemWithOverlineAndSupporting() {
     Column {
@@ -87,7 +87,7 @@ fun ThreeLineListItemWithOverlineAndSupporting() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ThreeLineListItemWithExtendedSupporting() {
     Column {

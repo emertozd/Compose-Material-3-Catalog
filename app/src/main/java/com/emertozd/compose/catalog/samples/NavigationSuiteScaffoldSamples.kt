@@ -16,18 +16,21 @@
 
 package com.emertozd.compose.catalog.samples
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.material3.adaptive.navigation.suite.ExperimentalMaterial3AdaptiveNavigationSuiteApi
-import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteScaffold
-import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteScaffoldDefaults
-import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteType
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuite
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldLayout
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -36,10 +39,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.window.core.layout.WindowWidthSizeClass
+import com.emertozd.compose.catalog.library.Sampled
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class,
-    ExperimentalMaterial3AdaptiveNavigationSuiteApi::class)
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Preview
+@Sampled
 @Composable
 fun NavigationSuiteScaffoldSample() {
     var selectedItem by remember { mutableIntStateOf(0) }
@@ -67,22 +72,23 @@ fun NavigationSuiteScaffoldSample() {
     }
 }
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class,
-    ExperimentalMaterial3AdaptiveNavigationSuiteApi::class)
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Preview
+@Sampled
 @Composable
 fun NavigationSuiteScaffoldCustomConfigSample() {
     var selectedItem by remember { mutableIntStateOf(0) }
     val navItems = listOf("Songs", "Artists", "Playlists")
     val adaptiveInfo = currentWindowAdaptiveInfo()
     // Custom configuration that shows a navigation drawer in large screens.
-    val customNavSuiteType = with(adaptiveInfo) {
-        if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded) {
-            NavigationSuiteType.NavigationDrawer
-        } else {
-            NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(adaptiveInfo)
+    val customNavSuiteType =
+        with(adaptiveInfo) {
+            if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
+                NavigationSuiteType.NavigationDrawer
+            } else {
+                NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(adaptiveInfo)
+            }
         }
-    }
 
     NavigationSuiteScaffold(
         layoutType = customNavSuiteType,
@@ -101,6 +107,56 @@ fun NavigationSuiteScaffoldCustomConfigSample() {
         Text(
             modifier = Modifier.padding(16.dp),
             text = "Current custom NavigationSuiteType: $customNavSuiteType"
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+@Preview
+@Sampled
+@Composable
+fun NavigationSuiteScaffoldCustomNavigationRail() {
+    var selectedItem by remember { mutableIntStateOf(0) }
+    val navItems = listOf("Songs", "Artists", "Playlists")
+    val navSuiteType =
+        NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo())
+
+    NavigationSuiteScaffoldLayout(
+        navigationSuite = {
+            // Custom Navigation Rail with centered items.
+            if (navSuiteType == NavigationSuiteType.NavigationRail) {
+                NavigationRail {
+                    // Adding Spacers before and after the item so they are pushed towards the
+                    // center of the NavigationRail.
+                    Spacer(Modifier.weight(1f))
+                    navItems.forEachIndexed { index, item ->
+                        NavigationRailItem(
+                            icon = { Icon(Icons.Filled.Favorite, contentDescription = item) },
+                            label = { Text(item) },
+                            selected = selectedItem == index,
+                            onClick = { selectedItem = index }
+                        )
+                    }
+                    Spacer(Modifier.weight(1f))
+                }
+            } else {
+                NavigationSuite {
+                    navItems.forEachIndexed { index, item ->
+                        item(
+                            icon = { Icon(Icons.Filled.Favorite, contentDescription = item) },
+                            label = { Text(item) },
+                            selected = selectedItem == index,
+                            onClick = { selectedItem = index }
+                        )
+                    }
+                }
+            }
+        }
+    ) {
+        // Screen content.
+        Text(
+            modifier = Modifier.padding(16.dp),
+            text = "Current NavigationSuiteType: $navSuiteType"
         )
     }
 }

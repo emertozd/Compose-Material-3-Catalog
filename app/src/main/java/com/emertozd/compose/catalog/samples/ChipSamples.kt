@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -54,9 +54,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.fastForEachIndexed
 
 @Preview
-
+@Sampled
 @Composable
 fun AssistChipSample() {
     AssistChip(
@@ -73,7 +74,7 @@ fun AssistChipSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ElevatedAssistChipSample() {
     ElevatedAssistChip(
@@ -90,7 +91,7 @@ fun ElevatedAssistChipSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun FilterChipSample() {
     var selected by remember { mutableStateOf(false) }
@@ -98,22 +99,23 @@ fun FilterChipSample() {
         selected = selected,
         onClick = { selected = !selected },
         label = { Text("Filter chip") },
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Localized Description",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
+        leadingIcon =
+            if (selected) {
+                {
+                    Icon(
+                        imageVector = Icons.Filled.Done,
+                        contentDescription = "Localized Description",
+                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                    )
+                }
+            } else {
+                null
             }
-        } else {
-            null
-        }
     )
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ElevatedFilterChipSample() {
     var selected by remember { mutableStateOf(false) }
@@ -121,22 +123,23 @@ fun ElevatedFilterChipSample() {
         selected = selected,
         onClick = { selected = !selected },
         label = { Text("Filter chip") },
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Localized Description",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
+        leadingIcon =
+            if (selected) {
+                {
+                    Icon(
+                        imageVector = Icons.Filled.Done,
+                        contentDescription = "Localized Description",
+                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                    )
+                }
+            } else {
+                null
             }
-        } else {
-            null
-        }
     )
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun FilterChipWithLeadingIconSample() {
     var selected by remember { mutableStateOf(false) }
@@ -144,28 +147,29 @@ fun FilterChipWithLeadingIconSample() {
         selected = selected,
         onClick = { selected = !selected },
         label = { Text("Filter chip") },
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Localized Description",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
+        leadingIcon =
+            if (selected) {
+                {
+                    Icon(
+                        imageVector = Icons.Filled.Done,
+                        contentDescription = "Localized Description",
+                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                    )
+                }
+            } else {
+                {
+                    Icon(
+                        imageVector = Icons.Filled.Home,
+                        contentDescription = "Localized description",
+                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                    )
+                }
             }
-        } else {
-            {
-                Icon(
-                    imageVector = Icons.Filled.Home,
-                    contentDescription = "Localized description",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
-            }
-        }
     )
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun InputChipSample() {
     var selected by remember { mutableStateOf(false) }
@@ -177,7 +181,7 @@ fun InputChipSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun InputChipWithAvatarSample() {
     var selected by remember { mutableStateOf(false) }
@@ -196,27 +200,21 @@ fun InputChipWithAvatarSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun SuggestionChipSample() {
-    SuggestionChip(
-        onClick = { /* Do something! */ },
-        label = { Text("Suggestion Chip") }
-    )
+    SuggestionChip(onClick = { /* Do something! */ }, label = { Text("Suggestion Chip") })
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ElevatedSuggestionChipSample() {
-    ElevatedSuggestionChip(
-        onClick = { /* Do something! */ },
-        label = { Text("Suggestion Chip") }
-    )
+    ElevatedSuggestionChip(onClick = { /* Do something! */ }, label = { Text("Suggestion Chip") })
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ChipGroupSingleLineSample() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -234,23 +232,34 @@ fun ChipGroupSingleLineSample() {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Preview
-
+@Sampled
 @Composable
 fun ChipGroupReflowSample() {
+    val colorNames =
+        listOf(
+            "Blue",
+            "Yellow",
+            "Red",
+            "Orange",
+            "Black",
+            "Green",
+            "White",
+            "Magenta",
+            "Gray",
+            "Transparent"
+        )
     Column {
         FlowRow(
-            Modifier
-                .fillMaxWidth(1f)
-                .wrapContentHeight(align = Alignment.Top),
+            Modifier.fillMaxWidth(1f).wrapContentHeight(align = Alignment.Top),
             horizontalArrangement = Arrangement.Start,
         ) {
-            repeat(10) { index ->
+            colorNames.fastForEachIndexed { index, element ->
                 AssistChip(
-                    modifier = Modifier
-                        .padding(horizontal = 4.dp)
-                        .align(alignment = Alignment.CenterVertically),
+                    modifier =
+                        Modifier.padding(horizontal = 4.dp)
+                            .align(alignment = Alignment.CenterVertically),
                     onClick = { /* do something*/ },
-                    label = { Text("Chip $index") }
+                    label = { Text("$element $index") }
                 )
             }
         }

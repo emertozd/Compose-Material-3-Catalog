@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Badge
@@ -32,7 +32,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
-
+@Sampled
 @Composable
 fun NavigationBarItemWithBadge() {
     NavigationBar {
@@ -44,16 +44,15 @@ fun NavigationBarItemWithBadge() {
                             val badgeNumber = "8"
                             Text(
                                 badgeNumber,
-                                modifier = Modifier.semantics {
-                                    contentDescription = "$badgeNumber new notifications"
-                                }
+                                modifier =
+                                    Modifier.semantics {
+                                        contentDescription = "$badgeNumber new notifications"
+                                    }
                             )
                         }
-                    }) {
-                    Icon(
-                        Icons.Filled.Star,
-                        contentDescription = "Favorite"
-                    )
+                    }
+                ) {
+                    Icon(Icons.Filled.Star, contentDescription = "Favorite")
                 }
             },
             selected = false,

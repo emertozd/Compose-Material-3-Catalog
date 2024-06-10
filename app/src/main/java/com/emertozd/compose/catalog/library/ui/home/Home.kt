@@ -35,7 +35,6 @@ import com.emertozd.compose.catalog.library.model.Theme
 import com.emertozd.compose.catalog.library.ui.common.CatalogScaffold
 import com.emertozd.compose.catalog.library.ui.component.ComponentItem
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Home(
     components: List<Component>,
@@ -47,7 +46,7 @@ fun Home(
 ) {
     val ltr = LocalLayoutDirection.current
     CatalogScaffold(
-        topBarTitle = "Compose Material 3",
+        topBarTitle = stringResource(id = R.string.compose_material_3),
         theme = theme,
         onThemeChange = onThemeChange,
         favorite = favorite,
@@ -58,13 +57,11 @@ fun Home(
             columns = GridCells.Adaptive(HomeCellMinSize),
             content = {
                 items(components) { component ->
-                    ComponentItem(
-                        component = component,
-                        onClick = onComponentClick
-                    )
+                    ComponentItem(component = component, onClick = onComponentClick)
                 }
             },
-            contentPadding = PaddingValues(
+            contentPadding =
+            PaddingValues(
                 start = paddingValues.calculateStartPadding(ltr) + HomePadding,
                 top = paddingValues.calculateTopPadding() + HomePadding,
                 end = paddingValues.calculateEndPadding(ltr) + HomePadding,

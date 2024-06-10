@@ -48,7 +48,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.emertozd.compose.catalog.R
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Component(
     component: Component,
@@ -74,7 +73,8 @@ fun Component(
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier.consumeWindowInsets(paddingValues),
-            contentPadding = PaddingValues(
+            contentPadding =
+            PaddingValues(
                 start = paddingValues.calculateStartPadding(ltr) + ComponentPadding,
                 top = paddingValues.calculateTopPadding() + ComponentPadding,
                 end = paddingValues.calculateEndPadding(ltr) + ComponentPadding,
@@ -83,17 +83,15 @@ fun Component(
         ) {
             item {
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = ComponentIconVerticalPadding)
+                    modifier =
+                    Modifier.fillMaxWidth().padding(vertical = ComponentIconVerticalPadding)
                 ) {
                     Image(
                         painter = painterResource(id = component.icon),
                         contentDescription = null,
-                        modifier = Modifier
-                            .size(ComponentIconSize)
-                            .align(Alignment.Center),
-                        colorFilter = if (component.tintIcon) {
+                        modifier = Modifier.size(ComponentIconSize).align(Alignment.Center),
+                        colorFilter =
+                        if (component.tintIcon) {
                             ColorFilter.tint(LocalContentColor.current)
                         } else {
                             null
@@ -107,10 +105,7 @@ fun Component(
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Spacer(modifier = Modifier.height(ComponentPadding))
-                Text(
-                    text = component.description,
-                    style = MaterialTheme.typography.bodyMedium
-                )
+                Text(text = component.description, style = MaterialTheme.typography.bodyMedium)
                 Spacer(modifier = Modifier.height(ComponentDescriptionPadding))
             }
             item {
@@ -122,10 +117,7 @@ fun Component(
             }
             if (component.examples.isNotEmpty()) {
                 items(component.examples) { example ->
-                    ExampleItem(
-                        example = example,
-                        onClick = onExampleClick
-                    )
+                    ExampleItem(example = example, onClick = onExampleClick)
                     Spacer(modifier = Modifier.height(ExampleItemPadding))
                 }
             } else {

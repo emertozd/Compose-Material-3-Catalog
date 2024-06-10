@@ -16,15 +16,16 @@
 
 package com.emertozd.compose.catalog.samples
 
-
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.Scaffold
+//noinspection UsingMaterialAndMaterial3Libraries
+import androidx.compose.material.FabPosition
+//noinspection UsingMaterialAndMaterial3Libraries
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -41,9 +42,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.emertozd.compose.catalog.library.Sampled
 
 @Preview
-
+@Sampled
 @Composable
 fun FloatingActionButtonSample() {
     FloatingActionButton(
@@ -54,7 +56,7 @@ fun FloatingActionButtonSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun SmallFloatingActionButtonSample() {
     SmallFloatingActionButton(
@@ -65,7 +67,7 @@ fun SmallFloatingActionButtonSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun LargeFloatingActionButtonSample() {
     LargeFloatingActionButton(
@@ -80,16 +82,14 @@ fun LargeFloatingActionButtonSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ExtendedFloatingActionButtonTextSample() {
-    ExtendedFloatingActionButton(onClick = { /* do something */ }) {
-        Text(text = "Extended FAB")
-    }
+    ExtendedFloatingActionButton(onClick = { /* do something */ }) { Text(text = "Extended FAB") }
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun ExtendedFloatingActionButtonSample() {
     ExtendedFloatingActionButton(
@@ -99,18 +99,15 @@ fun ExtendedFloatingActionButtonSample() {
     )
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview
-
+@Sampled
 @Composable
 fun AnimatedExtendedFloatingActionButtonSample() {
     val listState = rememberLazyListState()
     // The FAB is initially expanded. Once the first visible item is past the first item we
     // collapse the FAB. We use a remembered derived state to minimize unnecessary compositions.
-    val expandedFab by remember {
-        derivedStateOf {
-            listState.firstVisibleItemIndex == 0
-        }
-    }
+    val expandedFab by remember { derivedStateOf { listState.firstVisibleItemIndex == 0 } }
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
@@ -120,18 +117,13 @@ fun AnimatedExtendedFloatingActionButtonSample() {
                 text = { Text(text = "Extended FAB") },
             )
         },
+        isFloatingActionButtonDocked = false,
         floatingActionButtonPosition = FabPosition.End,
-        content ={ padding ->
-            LazyColumn(state = listState, modifier = Modifier.fillMaxSize().padding(padding)) {
-                for (index in 0 until 100) {
-                    item {
-                        Text(
-                            text = "List item - $index",
-                            modifier = Modifier.padding(24.dp)
-                        )
-                    }
-                }
+    ) {
+        LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
+            for (index in 0 until 100) {
+                item { Text(text = "List item - $index", modifier = Modifier.padding(24.dp)) }
             }
         }
-    )
+    }
 }

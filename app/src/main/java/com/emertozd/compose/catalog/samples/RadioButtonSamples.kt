@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,7 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Preview
-
+@Sampled
 @Composable
 fun RadioButtonSample() {
     // We have two radio buttons and only one can be selected
@@ -65,7 +65,7 @@ fun RadioButtonSample() {
 }
 
 @Preview
-
+@Sampled
 @Composable
 fun RadioGroupSample() {
     val radioOptions = listOf("Calls", "Missed", "Friends")
@@ -74,8 +74,7 @@ fun RadioGroupSample() {
     Column(Modifier.selectableGroup()) {
         radioOptions.forEach { text ->
             Row(
-                Modifier
-                    .fillMaxWidth()
+                Modifier.fillMaxWidth()
                     .height(56.dp)
                     .selectable(
                         selected = (text == selectedOption),

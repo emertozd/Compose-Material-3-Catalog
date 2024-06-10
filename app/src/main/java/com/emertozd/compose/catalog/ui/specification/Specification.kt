@@ -41,11 +41,10 @@ import com.emertozd.compose.catalog.model.Specification
 @OptIn(ExperimentalFoundationApi::class)
 fun Specification(
     specifications: List<Specification>,
-    onSpecificationClick: (specification: Specification) -> Unit,
+    onSpecificationClick: (specification: Specification) -> Unit
 ) {
-    SpecificationScaffold(
-        topBarTitle = stringResource(id = R.string.compose_material_catalog)
-    ) { paddingValues ->
+    SpecificationScaffold(topBarTitle = stringResource(id = R.string.compose_material_catalog)) {
+            paddingValues ->
         LazyColumn(
             content = {
                 item {
@@ -56,14 +55,12 @@ fun Specification(
                     Spacer(modifier = Modifier.height(SpecificationPadding))
                 }
                 items(specifications) { specification ->
-                    SpecificationItem(
-                        specification = specification,
-                        onClick = onSpecificationClick
-                    )
+                    SpecificationItem(specification = specification, onClick = onSpecificationClick)
                     Spacer(modifier = Modifier.height(SpecificationItemPadding))
                 }
             },
-            contentPadding = WindowInsets.safeDrawing
+            contentPadding =
+            WindowInsets.safeDrawing
                 .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
                 .add(
                     WindowInsets(

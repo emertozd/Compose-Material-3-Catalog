@@ -49,4 +49,9 @@
     <string name="carousel_image_4_description">A rock structure with its reflection mirrored over the sea</string>
     <string name="carousel_image_5_description">A car on a long stretch of desert road</string>
 
+    <string name="back_button">Back</string>
+    <string name="favorite_button">Pin screen</string>
+    <string name="change_theme_button">Change theme</string>
+    <string name="more_menu_button">External links</string>
+
 </resources>

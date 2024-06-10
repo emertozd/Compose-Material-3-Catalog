@@ -16,7 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-
+import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.outlined.Lock
@@ -35,10 +35,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
-
+@Sampled
 @Composable
 fun IconButtonSample() {
     IconButton(onClick = { /* doSomething() */ }) {
@@ -46,8 +48,22 @@ fun IconButtonSample() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
+@Sampled
+@Composable
+fun TintedIconButtonSample() {
+    IconButton(onClick = { /* doSomething() */ }) {
+        Icon(
+            rememberVectorPainter(image = Icons.Outlined.Lock),
+            contentDescription = "Localized description",
+            tint = { Color.Red }
+        )
+    }
+}
 
+@Preview
+@Sampled
 @Composable
 fun IconToggleButtonSample() {
     var checked by remember { mutableStateOf(false) }
@@ -60,9 +76,8 @@ fun IconToggleButtonSample() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
-
+@Sampled
 @Composable
 fun FilledIconButtonSample() {
     FilledIconButton(onClick = { /* doSomething() */ }) {
@@ -70,9 +85,8 @@ fun FilledIconButtonSample() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
-
+@Sampled
 @Composable
 fun FilledIconToggleButtonSample() {
     var checked by remember { mutableStateOf(false) }
@@ -85,9 +99,8 @@ fun FilledIconToggleButtonSample() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
-
+@Sampled
 @Composable
 fun FilledTonalIconButtonSample() {
     FilledTonalIconButton(onClick = { /* doSomething() */ }) {
@@ -95,9 +108,8 @@ fun FilledTonalIconButtonSample() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
-
+@Sampled
 @Composable
 fun FilledTonalIconToggleButtonSample() {
     var checked by remember { mutableStateOf(false) }
@@ -110,9 +122,8 @@ fun FilledTonalIconToggleButtonSample() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
-
+@Sampled
 @Composable
 fun OutlinedIconButtonSample() {
     OutlinedIconButton(onClick = { /* doSomething() */ }) {
@@ -120,9 +131,8 @@ fun OutlinedIconButtonSample() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
-
+@Sampled
 @Composable
 fun OutlinedIconToggleButtonSample() {
     var checked by remember { mutableStateOf(false) }
