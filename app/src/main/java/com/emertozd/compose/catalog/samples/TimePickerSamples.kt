@@ -158,11 +158,11 @@ fun TimePickerSwitchableSample() {
     if (showTimePicker) {
         TimePickerDialog(
             title =
-                if (showingPicker.value) {
-                    "Select Time "
-                } else {
-                    "Enter Time"
-                },
+            if (showingPicker.value) {
+                "Select Time "
+            } else {
+                "Enter Time"
+            },
             onCancel = { showTimePicker = false },
             onConfirm = {
                 val cal = Calendar.getInstance()
@@ -186,11 +186,11 @@ fun TimePickerSwitchableSample() {
                         Icon(
                             icon,
                             contentDescription =
-                                if (showingPicker.value) {
-                                    "Switch to Text Input"
-                                } else {
-                                    "Switch to Touch Input"
-                                }
+                            if (showingPicker.value) {
+                                "Switch to Text Input"
+                            } else {
+                                "Switch to Touch Input"
+                            }
                         )
                     }
                 }
@@ -221,12 +221,12 @@ fun TimePickerDialog(
             shape = MaterialTheme.shapes.extraLarge,
             tonalElevation = 6.dp,
             modifier =
-                Modifier.width(IntrinsicSize.Min)
-                    .height(IntrinsicSize.Min)
-                    .background(
-                        shape = MaterialTheme.shapes.extraLarge,
-                        color = MaterialTheme.colorScheme.surface
-                    ),
+            Modifier.width(IntrinsicSize.Min)
+                .height(IntrinsicSize.Min)
+                .background(
+                    shape = MaterialTheme.shapes.extraLarge,
+                    color = MaterialTheme.colorScheme.surface
+                ),
         ) {
             Column(
                 modifier = Modifier.padding(24.dp),

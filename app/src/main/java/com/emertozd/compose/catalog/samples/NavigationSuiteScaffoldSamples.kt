@@ -76,6 +76,7 @@ fun NavigationSuiteScaffoldSample() {
 @Preview
 @Sampled
 @Composable
+@Suppress("DEPRECATION") // WindowWidthSizeClass is deprecated
 fun NavigationSuiteScaffoldCustomConfigSample() {
     var selectedItem by remember { mutableIntStateOf(0) }
     val navItems = listOf("Songs", "Artists", "Playlists")

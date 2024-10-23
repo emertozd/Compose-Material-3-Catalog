@@ -31,13 +31,13 @@ data class Component(
     val id: Int,
     val name: String,
     val description: String,
-    @DrawableRes val icon: Int = R.drawable.ic_launcher_foreground,
+    @DrawableRes val icon: Int = R.drawable.ic_component,
     val tintIcon: Boolean = true,
     val guidelinesUrl: String,
     val docsUrl: String,
     val sourceUrl: String,
     val examples: List<Example>,
-    val hasError: Boolean = false,
+    val additionalInfo: String? = null,
 )
 
 private var nextId: Int = 1
@@ -51,15 +51,14 @@ private val Adaptive =
         id = nextId(),
         name = "Adaptive",
         description =
-            "Adaptive scaffolds provides automatic layout adjustment on different window size " +
+        "Adaptive scaffolds provides automatic layout adjustment on different window size " +
                 "classes and postures.\n\n" +
                 "Note: this sample is better experienced in a resizable emulator or foldable device.",
         // No adaptive icon
         guidelinesUrl = "$AdaptiveGuidelinesUrl/understanding-layout/overview",
         docsUrl = "$DocsUrl/adaptive",
         sourceUrl = "$AdaptiveSourceUrl/ThreePaneScaffold.kt",
-        examples = AdaptiveExamples,
-        hasError = true
+        examples = AdaptiveExamples
     )
 
 private val Badge =
@@ -67,7 +66,7 @@ private val Badge =
         id = nextId(),
         name = "Badge",
         description =
-            "A badge can contain dynamic information, such as the presence of a new " +
+        "A badge can contain dynamic information, such as the presence of a new " +
                 "notification or a number of pending requests. Badges can be icon only or contain " +
                 "a short text.",
         // No badge icon
@@ -82,7 +81,7 @@ private val BottomAppBars =
         id = nextId(),
         name = "Bottom App Bar",
         description =
-            "A bottom app bar displays navigation and key actions at the bottom of mobile " +
+        "A bottom app bar displays navigation and key actions at the bottom of mobile " +
                 "screens.",
         // No bottom app bar icon
         guidelinesUrl = "$ComponentGuidelinesUrl/bottom-app-bars",
@@ -96,7 +95,7 @@ private val BottomSheets =
         id = nextId(),
         name = "Bottom Sheet",
         description =
-            "Bottom sheets are surfaces containing supplementary content, anchored to the " +
+        "Bottom sheets are surfaces containing supplementary content, anchored to the " +
                 "bottom of the screen.",
         // No bottom sheet icon
         guidelinesUrl = "$ComponentGuidelinesUrl/bottom-sheets",
@@ -110,13 +109,25 @@ private val Buttons =
         id = nextId(),
         name = "Buttons",
         description =
-            "Buttons help people initiate actions, from sending an email, to sharing a " +
+        "Buttons help people initiate actions, from sending an email, to sharing a " +
                 "document, to liking a post.",
         // No buttons icon
         guidelinesUrl = "$ComponentGuidelinesUrl/buttons",
         docsUrl = "$PackageSummaryUrl#button",
         sourceUrl = "$Material3SourceUrl/Button.kt",
         examples = ButtonsExamples,
+    )
+
+private val ButtonGroups =
+    Component(
+        id = nextId(),
+        name = "Button Groups",
+        description =
+        "button groups is a container for material components that adds an animation on press",
+        guidelinesUrl = "$ComponentGuidelinesUrl/button-groups",
+        docsUrl = "$PackageSummaryUrl#buttongroups",
+        sourceUrl = "$Material3SourceUrl/ButtonGroup.kt",
+        examples = ButtonGroupsExamples,
     )
 
 private val Card =
@@ -136,7 +147,7 @@ private val Carousel =
         id = nextId(),
         name = "Carousel",
         description =
-            "Carousels are stylized versions of lists that provide a unique viewing and " +
+        "Carousels are stylized versions of lists that provide a unique viewing and " +
                 "behavior that suit large imagery and other visually rich content.",
         // No carousel icon
         guidelinesUrl = "$StyleGuidelinesUrl/carousel",
@@ -150,7 +161,7 @@ private val Checkboxes =
         id = nextId(),
         name = "Checkboxes",
         description =
-            "Checkboxes allow the user to select one or more items from a set or turn an " +
+        "Checkboxes allow the user to select one or more items from a set or turn an " +
                 "option on or off.",
         // No checkbox icon
         guidelinesUrl = "$ComponentGuidelinesUrl/checkboxes",
@@ -164,7 +175,7 @@ private val Chips =
         id = nextId(),
         name = "Chips",
         description =
-            "Chips allow users to enter information, make selections, filter content, or" +
+        "Chips allow users to enter information, make selections, filter content, or" +
                 " trigger actions.",
         // No chip icon
         guidelinesUrl = "$ComponentGuidelinesUrl/chips",
@@ -190,7 +201,7 @@ private val Dialogs =
         id = nextId(),
         name = "Dialogs",
         description =
-            "Dialogs provide important prompts in a user flow. They can require an action, " +
+        "Dialogs provide important prompts in a user flow. They can require an action, " +
                 "communicate information, or help users accomplish a task.",
         // No dialogs icon
         guidelinesUrl = "$ComponentGuidelinesUrl/dialogs",
@@ -204,7 +215,7 @@ private val ExtendedFloatingActionButton =
         id = nextId(),
         name = "Extended FAB",
         description =
-            "Extended FABs help people take primary actions. They're wider than FABs to " +
+        "Extended FABs help people take primary actions. They're wider than FABs to " +
                 "accommodate a text label and larger target area.",
         // No extended FAB icon
         guidelinesUrl = "$ComponentGuidelinesUrl/extended-fab",
@@ -218,7 +229,7 @@ private val FloatingActionButtons =
         id = nextId(),
         name = "Floating action buttons",
         description =
-            "The FAB represents the most important action on a screen. It puts key actions " +
+        "The FAB represents the most important action on a screen. It puts key actions " +
                 "within reach.",
         // No FABs icon
         guidelinesUrl = "$ComponentGuidelinesUrl/floating-action-button",
@@ -227,12 +238,36 @@ private val FloatingActionButtons =
         examples = FloatingActionButtonsExamples,
     )
 
+private val FloatingActionButtonMenu =
+    Component(
+        id = nextId(),
+        name = "FAB Menu",
+        description = "The FAB Menu displays additional key actions on click of a FAB.",
+        // No FAB Menu icon
+        guidelinesUrl = "$ComponentGuidelinesUrl/fab-menu",
+        docsUrl = "$PackageSummaryUrl#floatingactionbuttonmenu",
+        sourceUrl = "$Material3SourceUrl/FloatingActionButtonMenu.kt",
+        examples = FloatingActionButtonMenuExamples,
+    )
+
+private val FloatingAppBars =
+    Component(
+        id = nextId(),
+        name = "Floating App Bar",
+        description = "A floating app bar displays key actions above the content.",
+        // No floating app bar icon
+        guidelinesUrl = "$ComponentGuidelinesUrl/floating-app-bars",
+        docsUrl = "$DocsUrl#floatingappbar",
+        sourceUrl = "$Material3SourceUrl/FloatingAppBar.kt",
+        examples = FloatingAppBarsExamples
+    )
+
 private val IconButtons =
     Component(
         id = nextId(),
         name = "Icon buttons",
         description =
-            "Icon buttons allow users to take actions and make choices with a single tap.",
+        "Icon buttons allow users to take actions and make choices with a single tap.",
         // No icon-button icon
         guidelinesUrl = "$ComponentGuidelinesUrl/icon-button",
         docsUrl = "$PackageSummaryUrl#iconbutton",
@@ -252,6 +287,22 @@ private val Lists =
         sourceUrl = "$Material3SourceUrl/ListItem.kt",
         examples = ListsExamples,
     )
+
+private val LoadingIndicators =
+    Component(
+        id = nextId(),
+        name = "Loading indicators",
+        description =
+        "Loading indicators express an unspecified wait time or display the length of " +
+                "a loading process.",
+        // No loading indicator icon
+        guidelinesUrl = "$ComponentGuidelinesUrl/loading-indicators",
+        tintIcon = true,
+        docsUrl = "$PackageSummaryUrl#loadingindicator",
+        sourceUrl = "$Material3SourceUrl/LoadingIndicator.kt",
+        examples = LoadingIndicatorsExamples,
+    )
+
 private val Menus =
     Component(
         id = nextId(),
@@ -269,7 +320,7 @@ private val NavigationBar =
         id = nextId(),
         name = "Navigation bar",
         description =
-            "Navigation bars offer a persistent and convenient way to switch between " +
+        "Navigation bars offer a persistent and convenient way to switch between " +
                 "primary destinations in an app.",
         // No navigation bar icon
         guidelinesUrl = "$ComponentGuidelinesUrl/navigation-bar",
@@ -295,7 +346,7 @@ private val NavigationRail =
         id = nextId(),
         name = "Navigation rail",
         description =
-            "Navigation rails provide access to primary destinations in apps when using " +
+        "Navigation rails provide access to primary destinations in apps when using " +
                 "tablet and desktop screens.",
         // No navigation rail icon
         guidelinesUrl = "$ComponentGuidelinesUrl/navigation-rail",
@@ -309,7 +360,7 @@ private val NavigationSuiteScaffold =
         id = nextId(),
         name = "Navigation Suite Scaffold",
         description =
-            "The Navigation Suite Scaffold wraps the provided content and places the " +
+        "The Navigation Suite Scaffold wraps the provided content and places the " +
                 "adequate provided navigation component on the screen according to the current " +
                 "NavigationSuiteType. \n\n" +
                 "Note: this sample is better experienced in a resizable emulator or foldable device.",
@@ -325,7 +376,7 @@ private val ProgressIndicators =
         id = nextId(),
         name = "Progress indicators",
         description =
-            "Progress indicators express an unspecified wait time or display the length of " +
+        "Progress indicators express an unspecified wait time or display the length of " +
                 "a process.",
         // No progress indicator icon
         guidelinesUrl = "$ComponentGuidelinesUrl/progress-indicators",
@@ -339,7 +390,7 @@ private val PullToRefreshIndicators =
         id = nextId(),
         name = "Pull-to-Refresh Indicator",
         description =
-            "Pull to refresh is a swipe gesture available at the beginning of lists, grid " +
+        "Pull to refresh is a swipe gesture available at the beginning of lists, grid " +
                 "lists, and card collections where the most recent content appears ",
         // No pull-to-refresh icon
         // TODO: Request component guidelines documentation from design.
@@ -366,7 +417,7 @@ private val SearchBars =
         id = nextId(),
         name = "Search bars",
         description =
-            "Search bars allow users to enter a keyword or phrase and get relevant " +
+        "Search bars allow users to enter a keyword or phrase and get relevant " +
                 "information.",
         // No search bar icon
         guidelinesUrl = "", // No guidelines yet
@@ -380,11 +431,22 @@ private val SegmentedButtons =
         id = nextId(),
         name = "Segmented Button",
         description =
-            "Segmented buttons help people select options, switch views, or sort elements.",
+        "Segmented buttons help people select options, switch views, or sort elements.",
         guidelinesUrl = "", // No guidelines yet
         docsUrl = "", // No docs yet
         sourceUrl = "$Material3SourceUrl/SegmentedButton.kt",
         examples = SegmentedButtonExamples
+    )
+
+private val ToggleButtons =
+    Component(
+        id = nextId(),
+        name = "ToggleButtons",
+        description = "Toggle buttons provide a selectable button that animates on press.",
+        guidelinesUrl = "", // No guidelines yet
+        docsUrl = "", // No docs yet
+        sourceUrl = "$Material3SourceUrl/ToggleButton.kt",
+        examples = ToggleButtonsExamples
     )
 
 private val Sliders =
@@ -404,13 +466,24 @@ private val Snackbars =
         id = nextId(),
         name = "Snackbars",
         description =
-            "Snackbars provide brief messages about app processes at the bottom of the " +
+        "Snackbars provide brief messages about app processes at the bottom of the " +
                 "screen.",
         // No snackbar icon
         guidelinesUrl = "$ComponentGuidelinesUrl/snackbars",
         docsUrl = "$DocsUrl#snackbar",
         sourceUrl = "$Material3SourceUrl/Snackbar.kt",
         examples = SnackbarsExamples
+    )
+
+private val SplitButtons =
+    Component(
+        id = nextId(),
+        name = "Split Button",
+        description = "Split buttons let user perform additional actions besides the main action",
+        guidelinesUrl = "", // No guidelines yet
+        docsUrl = "", // No docs yet
+        sourceUrl = "$Material3SourceUrl/SplitButton.kt",
+        examples = SplitButtonExamples
     )
 
 private val Switches =
@@ -431,7 +504,7 @@ private val Tabs =
         id = nextId(),
         name = "Tabs",
         description =
-            "Tabs organize content across different screens, data sets, and other " +
+        "Tabs organize content across different screens, data sets, and other " +
                 "interactions.",
         // No tabs icon
         guidelinesUrl = "$ComponentGuidelinesUrl/tabs",
@@ -488,6 +561,18 @@ private val TopAppBar =
         examples = TopAppBarExamples
     )
 
+private val MaterialShapes =
+    Component(
+        id = nextId(),
+        name = "Material Shapes",
+        description = "Material Shapes are used to define the shape of components.",
+        // No material shapes icon
+        guidelinesUrl = "$ComponentGuidelinesUrl/material-shapes",
+        docsUrl = "$PackageSummaryUrl#shapes",
+        sourceUrl = "$Material3SourceUrl/Shapes.kt",
+        examples = MaterialShapesExamples
+    )
+
 /** Components for the catalog, ordered alphabetically by name. */
 val Components =
     listOf(
@@ -496,6 +581,7 @@ val Components =
         BottomAppBars,
         BottomSheets,
         Buttons,
+        ButtonGroups,
         Card,
         Carousel,
         Checkboxes,
@@ -504,8 +590,11 @@ val Components =
         Dialogs,
         ExtendedFloatingActionButton,
         FloatingActionButtons,
+        FloatingActionButtonMenu,
+        FloatingAppBars,
         IconButtons,
         Lists,
+        LoadingIndicators,
         Menus,
         NavigationBar,
         NavigationDrawer,
@@ -518,10 +607,13 @@ val Components =
         SegmentedButtons,
         Sliders,
         Snackbars,
+        SplitButtons,
         Switches,
         Tabs,
         TextFields,
         TimePickers,
+        ToggleButtons,
         Tooltips,
-        TopAppBar
+        TopAppBar,
+        MaterialShapes
     )

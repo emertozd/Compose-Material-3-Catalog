@@ -206,7 +206,7 @@ fun ScaffoldWithCustomSnackbar() {
 
                 Snackbar(
                     modifier =
-                        Modifier.border(2.dp, MaterialTheme.colorScheme.secondary).padding(12.dp),
+                    Modifier.border(2.dp, MaterialTheme.colorScheme.secondary).padding(12.dp),
                     action = {
                         TextButton(
                             onClick = { if (isError) data.dismiss() else data.performAction() },
@@ -315,8 +315,8 @@ fun ScaffoldWithMultilineSnackbar() {
                     scope.launch {
                         val longMessage =
                             "Very very very very very very very very very very very very very " +
-                                "very very very very very very very very very very very very " +
-                                "very very very very very very very very very very long message"
+                                    "very very very very very very very very very very very very " +
+                                    "very very very very very very very very very very long message"
                         snackbarHostState.showSnackbar(longMessage)
                     }
                 }

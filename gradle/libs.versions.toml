@@ -1,23 +1,55 @@
 [versions]
-agp = "8.2.2"
-kotlin = "1.9.0"
+adaptive = "1.1.0-alpha05"
+agp = "8.5.2"
+kotlin = "2.0.21"
 core-ktx = "1.13.1"
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
-lifecycle-runtime-ktx = "2.8.1"
-activity-compose = "1.9.0"
-compose-bom = "2024.05.00"
-navigation-compose = "2.7.7"
+androidx-test-ext-junit = "1.2.1"
+espresso-core = "3.6.1"
+lifecycle-runtime-ktx = "2.8.6"
+compose = "1.8.0-alpha04"
+activity-compose = "1.9.3"
+compose-bom = "2024.10.00"
+material-icons = "1.7.4"
+material3 = "1.4.0-alpha02"
+navigation-compose = "2.8.3"
 datastore-core = "1.1.1"
-material3-android = "1.3.0-beta02"
-material3-adaptive-android = "1.0.0-beta02"
-material3-adaptive-navigation-suite-android = "1.0.0-beta02"
-material3-window-size = "1.3.0-beta02"
-adaptive-android = "1.0.0-beta02"
-adaptive-navigation-android = "1.0.0-beta02"
 
 [libraries]
+androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
+androidx-adaptive-navigation = { module = "androidx.compose.material3.adaptive:adaptive-navigation", version.ref = "adaptive" }
+androidx-adaptive-layout = { module = "androidx.compose.material3.adaptive:adaptive-layout", version.ref = "adaptive" }
+androidx-animation-core = { module = "androidx.compose.animation:animation-core", version.ref = "compose" }
+androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "compose" }
+androidx-animation-graphics = { module = "androidx.compose.animation:animation-graphics", version.ref = "compose" }
+androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+androidx-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "material-icons" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons" }
+androidx-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "material-icons" }
+androidx-material-ripple = { module = "androidx.compose.material:material-ripple", version.ref = "compose" }
+androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+androidx-material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite", version.ref = "material3" }
+androidx-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
+androidx-runtime-rxjava2 = { module = "androidx.compose.runtime:runtime-rxjava2", version.ref = "compose" }
+androidx-runtime-rxjava3 = { module = "androidx.compose.runtime:runtime-rxjava3", version.ref = "compose" }
+androidx-runtime-saveable = { module = "androidx.compose.runtime:runtime-saveable", version.ref = "compose" }
+androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-ui-geometry = { module = "androidx.compose.ui:ui-geometry", version.ref = "compose" }
+androidx-ui-test = { module = "androidx.compose.ui:ui-test", version.ref = "compose" }
+androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+androidx-ui-text = { module = "androidx.compose.ui:ui-text", version.ref = "compose" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "compose" }
+androidx-ui-tooling-data = { module = "androidx.compose.ui:ui-tooling-data", version.ref = "compose" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+androidx-ui-unit = { module = "androidx.compose.ui:ui-unit", version.ref = "compose" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+androidx-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
+androidx-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
@@ -33,11 +65,9 @@ ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
 androidx-datastore-core = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-core" }
-androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3-android" }
-androidx-material3-adaptive-android = { group = "androidx.compose.material3", name = "material3-adaptive-android", version.ref = "material3-adaptive-android" }
-androidx-material3-adaptive-navigation-suite-android = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite-android", version.ref = "material3-adaptive-navigation-suite-android" }
-androidx-material3-window-size = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "material3-window-size" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3" }
+androidx-material3-window-size = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "material3" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

@@ -43,13 +43,13 @@ fun SwipeToDismissListItems() {
         state = dismissState,
         backgroundContent = {
             val color by
-                animateColorAsState(
-                    when (dismissState.targetValue) {
-                        SwipeToDismissBoxValue.Settled -> Color.LightGray
-                        SwipeToDismissBoxValue.StartToEnd -> Color.Green
-                        SwipeToDismissBoxValue.EndToStart -> Color.Red
-                    }
-                )
+            animateColorAsState(
+                when (dismissState.targetValue) {
+                    SwipeToDismissBoxValue.Settled -> Color.LightGray
+                    SwipeToDismissBoxValue.StartToEnd -> Color.Green
+                    SwipeToDismissBoxValue.EndToStart -> Color.Red
+                }
+            )
             Box(Modifier.fillMaxSize().background(color))
         }
     ) {

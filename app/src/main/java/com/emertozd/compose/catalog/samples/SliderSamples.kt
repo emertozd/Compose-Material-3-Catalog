@@ -85,8 +85,8 @@ fun LegacySliderSample() {
         Slider(
             interactionSource = interactionSource,
             modifier =
-                Modifier.semantics { contentDescription = "Localized Description" }
-                    .requiredSizeIn(minWidth = thumbSize.width, minHeight = trackHeight),
+            Modifier.semantics { contentDescription = "Localized Description" }
+                .requiredSizeIn(minWidth = thumbSize.width, minHeight = trackHeight),
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
             thumb = {
@@ -260,8 +260,8 @@ fun LegacyRangeSliderSample() {
             startInteractionSource = startInteractionSource,
             endInteractionSource = endInteractionSource,
             modifier =
-                Modifier.semantics { contentDescription = "Localized Description" }
-                    .requiredSizeIn(minWidth = thumbSize.width, minHeight = trackHeight),
+            Modifier.semantics { contentDescription = "Localized Description" }
+                .requiredSizeIn(minWidth = thumbSize.width, minHeight = trackHeight),
             startThumb = {
                 val modifier =
                     Modifier.size(thumbSize)

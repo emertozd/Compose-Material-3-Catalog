@@ -16,9 +16,7 @@
 
 package com.emertozd.compose.catalog.samples
 
-import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.TrendingUp
 import androidx.compose.material.icons.filled.BookmarkBorder
@@ -36,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.emertozd.compose.catalog.library.Sampled
 
 @Sampled
 @Composable
@@ -48,7 +47,7 @@ fun SegmentedButtonSingleSelectSample() {
             SegmentedButton(
                 shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
                 onClick = { selectedIndex = index },
-                selected = index == selectedIndex
+                selected = index == selectedIndex,
             ) {
                 Text(label)
             }
@@ -66,7 +65,7 @@ fun SegmentedButtonMultiSelectSample() {
         listOf(
             Icons.Filled.StarBorder,
             Icons.AutoMirrored.Filled.TrendingUp,
-            Icons.Filled.BookmarkBorder
+            Icons.Filled.BookmarkBorder,
         )
     MultiChoiceSegmentedButtonRow {
         options.forEachIndexed { index, label ->
@@ -74,10 +73,10 @@ fun SegmentedButtonMultiSelectSample() {
                 shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
                 icon = {
                     SegmentedButtonDefaults.Icon(active = index in checkedList) {
-                        Icon(
+                        androidx.compose.material3.Icon(
                             imageVector = icons[index],
                             contentDescription = null,
-                            modifier = Modifier.size(SegmentedButtonDefaults.IconSize)
+                            modifier = Modifier.size(SegmentedButtonDefaults.IconSize),
                         )
                     }
                 },
@@ -88,7 +87,7 @@ fun SegmentedButtonMultiSelectSample() {
                         checkedList.add(index)
                     }
                 },
-                checked = index in checkedList
+                checked = index in checkedList,
             ) {
                 Text(label)
             }

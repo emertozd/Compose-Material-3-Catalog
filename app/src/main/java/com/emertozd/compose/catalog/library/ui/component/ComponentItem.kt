@@ -63,7 +63,7 @@ fun ComponentItem(component: Component, onClick: (component: Component) -> Unit)
                 modifier = Modifier.align(Alignment.BottomStart),
                 style = MaterialTheme.typography.bodySmall
             )
-            if (component.hasError) {
+            if (!component.additionalInfo.isNullOrBlank()) {
                 Text(
                     modifier =
                         Modifier.background(
@@ -72,7 +72,7 @@ fun ComponentItem(component: Component, onClick: (component: Component) -> Unit)
                             )
                             .align(Alignment.TopEnd)
                             .padding(4.dp),
-                    text = "Not Working",
+                    text = component.additionalInfo,
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.surface
                 )
@@ -96,7 +96,7 @@ fun ComponentItemPreview() {
                 docsUrl = "https://search.yahoo.com/search?p=accommodare",
                 sourceUrl = "https://www.google.com/#q=reque",
                 examples = listOf(),
-                hasError = true
+                additionalInfo = "Unofficial"
             ),
         {}
     )

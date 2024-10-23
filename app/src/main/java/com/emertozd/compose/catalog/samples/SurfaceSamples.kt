@@ -69,11 +69,11 @@ fun ToggleableSurfaceSample() {
         checked = checked,
         onCheckedChange = { checked = !checked },
         color =
-            if (checked) {
-                MaterialTheme.colorScheme.surfaceVariant
-            } else {
-                MaterialTheme.colorScheme.surface
-            }
+        if (checked) {
+            MaterialTheme.colorScheme.surfaceVariant
+        } else {
+            MaterialTheme.colorScheme.surface
+        }
     ) {
         Text(text = if (checked) "ON" else "OFF", textAlign = TextAlign.Center)
     }

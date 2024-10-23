@@ -23,15 +23,17 @@ import android.content.ContextWrapper
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialExpressiveTheme
 import androidx.compose.material3.MaterialTheme
 import com.emertozd.compose.catalog.library.model.ColorMode
 import com.emertozd.compose.catalog.library.model.FontScaleMode
 import com.emertozd.compose.catalog.library.model.TextDirection
 import com.emertozd.compose.catalog.library.model.Theme
-import com.emertozd.compose.catalog.library.model.ThemeMode
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.expressiveLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -44,8 +46,11 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.view.WindowCompat
+import com.emertozd.compose.catalog.library.model.ExpressiveThemeMode
+import com.emertozd.compose.catalog.library.model.ThemeColorMode
 
 @SuppressLint("NewApi")
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun CatalogTheme(theme: Theme, content: @Composable () -> Unit) {
     val context = LocalContext.current
@@ -53,7 +58,11 @@ fun CatalogTheme(theme: Theme, content: @Composable () -> Unit) {
         when (theme.colorMode) {
             ColorMode.Dynamic -> dynamicLightColorScheme(context)
             ColorMode.Custom -> LightCustomColorScheme
-            ColorMode.Baseline -> lightColorScheme()
+            ColorMode.Baseline -> {
+                if (theme.expressiveThemeMode == ExpressiveThemeMode.Expressive) {
+                    expressiveLightColorScheme()
+                } else lightColorScheme()
+            }
         }
     val darkColorScheme =
         when (theme.colorMode) {
@@ -63,7 +72,7 @@ fun CatalogTheme(theme: Theme, content: @Composable () -> Unit) {
         }
     val colorScheme =
         colorSchemeFromThemeMode(
-            themeMode = theme.themeMode,
+            themeColorMode = theme.themeColorMode,
             lightColorScheme = lightColorScheme,
             darkColorScheme = darkColorScheme
         )
@@ -95,23 +104,30 @@ fun CatalogTheme(theme: Theme, content: @Composable () -> Unit) {
                     }
                 )
     ) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            content = content,
-        )
+        if (theme.expressiveThemeMode == ExpressiveThemeMode.Expressive) {
+            MaterialExpressiveTheme(
+                colorScheme = colorScheme,
+                content = content,
+            )
+        } else {
+            MaterialTheme(
+                colorScheme = colorScheme,
+                content = content,
+            )
+        }
     }
 }
 
 @Composable
 fun colorSchemeFromThemeMode(
-    themeMode: ThemeMode,
+    themeColorMode: ThemeColorMode,
     lightColorScheme: ColorScheme,
     darkColorScheme: ColorScheme
 ): ColorScheme {
-    return when (themeMode) {
-        ThemeMode.Light -> lightColorScheme
-        ThemeMode.Dark -> darkColorScheme
-        ThemeMode.System ->
+    return when (themeColorMode) {
+        ThemeColorMode.Light -> lightColorScheme
+        ThemeColorMode.Dark -> darkColorScheme
+        ThemeColorMode.System ->
             if (!isSystemInDarkTheme()) {
                 lightColorScheme
             } else {

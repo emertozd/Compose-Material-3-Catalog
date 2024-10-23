@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Image
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -178,22 +179,22 @@ fun FadingHorizontalMultiBrowseCarouselSample() {
             ) {
                 Image(
                     modifier =
-                        Modifier.fillMaxWidth()
-                            .fillMaxHeight(.5f)
-                            .maskClip(MaterialTheme.shapes.extraLarge)
-                            .maskBorder(
-                                BorderStroke(3.dp, Color.Magenta),
-                                MaterialTheme.shapes.extraLarge
-                            ),
+                    Modifier.fillMaxWidth()
+                        .fillMaxHeight(.5f)
+                        .maskClip(MaterialTheme.shapes.extraLarge)
+                        .maskBorder(
+                            BorderStroke(3.dp, Color.Magenta),
+                            MaterialTheme.shapes.extraLarge
+                        ),
                     painter = painterResource(id = item.imageResId),
                     contentDescription = stringResource(item.contentDescriptionResId),
                     contentScale = ContentScale.Crop
                 )
                 Image(
                     modifier =
-                        Modifier.fillMaxSize()
-                            .maskClip(RoundedCornerShape(8.dp))
-                            .maskBorder(BorderStroke(5.dp, Color.Green), RoundedCornerShape(8.dp)),
+                    Modifier.fillMaxSize()
+                        .maskClip(RoundedCornerShape(8.dp))
+                        .maskBorder(BorderStroke(5.dp, Color.Green), RoundedCornerShape(8.dp)),
                     painter = painterResource(id = item.imageResId),
                     contentDescription = stringResource(item.contentDescriptionResId),
                     contentScale = ContentScale.Crop
@@ -217,9 +218,9 @@ fun FadingHorizontalMultiBrowseCarouselSample() {
             }
             Box(
                 modifier =
-                    Modifier.height(205.dp)
-                        .maskClip(pathShape)
-                        .maskBorder(BorderStroke(5.dp, Color.Red), pathShape),
+                Modifier.height(205.dp)
+                    .maskClip(pathShape)
+                    .maskBorder(BorderStroke(5.dp, Color.Red), pathShape),
             ) {
                 Image(
                     painter = painterResource(id = item.imageResId),
@@ -231,25 +232,25 @@ fun FadingHorizontalMultiBrowseCarouselSample() {
                     onClick = { /* Do something! */ },
                     label = { Text("Image $i") },
                     modifier =
-                        Modifier.graphicsLayer {
-                            // Fade the chip in once the carousel item's size is large enough to
-                            // display the entire chip
-                            alpha =
-                                lerp(
-                                    0f,
-                                    1f,
-                                    max(
-                                        size.width - (carouselItemInfo.maxSize) +
-                                            carouselItemInfo.size,
-                                        0f
-                                    ) / size.width
-                                )
-                            // Translate the chip to be pinned to the left side of the item's mask
-                            translationX = carouselItemInfo.maskRect.left + 8.dp.toPx()
-                        },
+                    Modifier.graphicsLayer {
+                        // Fade the chip in once the carousel item's size is large enough to
+                        // display the entire chip
+                        alpha =
+                            lerp(
+                                0f,
+                                1f,
+                                max(
+                                    size.width - (carouselItemDrawInfo.maxSize) +
+                                            carouselItemDrawInfo.size,
+                                    0f
+                                ) / size.width
+                            )
+                        // Translate the chip to be pinned to the left side of the item's mask
+                        translationX = carouselItemDrawInfo.maskRect.left + 8.dp.toPx()
+                    },
                     leadingIcon = {
                         Icon(
-                            Icons.Filled.Favorite,
+                            Icons.Filled.Image,
                             contentDescription = "Localized description",
                             Modifier.size(AssistChipDefaults.IconSize)
                         )
