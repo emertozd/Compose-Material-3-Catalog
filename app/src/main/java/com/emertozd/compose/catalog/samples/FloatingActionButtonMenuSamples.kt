@@ -96,10 +96,10 @@ fun FloatingActionButtonMenuSample() {
                 ToggleFloatingActionButton(
                     modifier =
                         Modifier.semantics {
-                                traversalIndex = -1f
-                                stateDescription = if (fabMenuExpanded) "Expanded" else "Collapsed"
-                                contentDescription = "Toggle menu"
-                            }
+                            traversalIndex = -1f
+                            stateDescription = if (fabMenuExpanded) "Expanded" else "Collapsed"
+                            contentDescription = "Toggle menu"
+                        }
                             .animateFloatingActionButton(
                                 visible = fabVisible || fabMenuExpanded,
                                 alignment = Alignment.BottomEnd

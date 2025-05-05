@@ -87,7 +87,7 @@ fun AlertDialogWithIconSample() {
             text = {
                 Text(
                     "This area typically contains the supportive text " +
-                        "which presents the details regarding the Dialog's purpose."
+                            "which presents the details regarding the Dialog's purpose."
                 )
             },
             confirmButton = {
@@ -125,7 +125,7 @@ fun BasicAlertDialogSample() {
                     Text(
                         text =
                             "This area typically contains the supportive text " +
-                                "which presents the details regarding the Dialog's purpose.",
+                                    "which presents the details regarding the Dialog's purpose.",
                     )
                     Spacer(modifier = Modifier.height(24.dp))
                     TextButton(

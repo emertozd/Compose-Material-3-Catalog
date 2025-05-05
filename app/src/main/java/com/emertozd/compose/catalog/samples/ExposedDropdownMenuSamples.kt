@@ -116,7 +116,7 @@ fun EditableExposedDropdownMenuSample() {
             // expanding/collapsing the menu on click. An editable text field has
             // the anchor type `PrimaryEditable`.
             modifier =
-            Modifier.width(280.dp).menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
+                Modifier.width(280.dp).menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
             state = textFieldState,
             lineLimits = TextFieldLineLimits.SingleLine,
             label = { Text("Label") },
@@ -206,7 +206,7 @@ fun MultiAutocompleteExposedDropdownMenuSample() {
     ) {
         TextField(
             modifier =
-            Modifier.width(280.dp).menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
+                Modifier.width(280.dp).menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
             state = textFieldState,
             lineLimits = TextFieldLineLimits.SingleLine,
             label = { Text("Label") },

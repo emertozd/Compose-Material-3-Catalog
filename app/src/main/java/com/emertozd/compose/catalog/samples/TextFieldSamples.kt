@@ -119,11 +119,11 @@ fun TextFieldWithTransformations() {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         // Input transformation to limit user input to 10 digits
         inputTransformation =
-        InputTransformation.maxLength(10).then {
-            if (!this.asCharSequence().isDigitsOnly()) {
-                revertAllChanges()
-            }
-        },
+            InputTransformation.maxLength(10).then {
+                if (!this.asCharSequence().isDigitsOnly()) {
+                    revertAllChanges()
+                }
+            },
         outputTransformation = {
             // Output transformation to format as a phone number: (XXX) XXX-XXXX
             if (length > 0) insert(0, "(")
@@ -167,9 +167,7 @@ fun TextFieldWithPlaceholder() {
             state = rememberTextFieldState(),
             lineLimits = TextFieldLineLimits.SingleLine,
             label = { Text("Email") },
-            //TODO: No field such as TextFieldLabelPosition.Attached in 1.4.0-alpha02
-//            labelPosition = TextFieldLabelPosition.Attached(alwaysMinimize = alwaysMinimizeLabel),
-            labelPosition = TextFieldLabelPosition.Default(alwaysMinimize = alwaysMinimizeLabel),
+            labelPosition = TextFieldLabelPosition.Attached(alwaysMinimize = alwaysMinimizeLabel),
             placeholder = { Text("example@gmail.com") }
         )
     }
@@ -190,7 +188,7 @@ fun TextFieldWithPrefixAndSuffix() {
             state = rememberTextFieldState(),
             lineLimits = TextFieldLineLimits.SingleLine,
             label = { Text("Label") },
-            labelPosition = TextFieldLabelPosition.Default(alwaysMinimize = alwaysMinimizeLabel),
+            labelPosition = TextFieldLabelPosition.Attached(alwaysMinimize = alwaysMinimizeLabel),
             prefix = { Text("www.") },
             suffix = { Text(".com") },
             placeholder = { Text("google") },
@@ -229,11 +227,11 @@ fun TextFieldWithErrorState() {
         isError = isError,
         onKeyboardAction = { validate(state.text) },
         modifier =
-        Modifier.semantics {
-            maxTextLength = charLimit
-            // Provide localized description of the error
-            if (isError) error(errorMessage)
-        }
+            Modifier.semantics {
+                maxTextLength = charLimit
+                // Provide localized description of the error
+                if (isError) error(errorMessage)
+            }
     )
 }
 
@@ -260,8 +258,8 @@ fun PasswordTextField() {
         state = rememberTextFieldState(),
         label = { Text("Enter password") },
         textObfuscationMode =
-        if (passwordHidden) TextObfuscationMode.RevealLastTyped
-        else TextObfuscationMode.Visible,
+            if (passwordHidden) TextObfuscationMode.RevealLastTyped
+            else TextObfuscationMode.Visible,
         trailingIcon = {
             IconButton(onClick = { passwordHidden = !passwordHidden }) {
                 val visibilityIcon =
@@ -357,24 +355,24 @@ fun CustomTextFieldUsingDecorator() {
         lineLimits = lineLimits,
         textStyle = LocalTextStyle.current,
         decorator =
-        TextFieldDefaults.decorator(
-            state = state,
-            outputTransformation = null,
-            lineLimits = lineLimits,
-            enabled = enabled,
-            isError = isError,
-            interactionSource = interactionSource,
-            container = {
-                TextFieldDefaults.Container(
-                    enabled = enabled,
-                    isError = isError,
-                    interactionSource = interactionSource,
-                    // Update indicator line thickness
-                    unfocusedIndicatorLineThickness = 2.dp,
-                    focusedIndicatorLineThickness = 4.dp,
-                )
-            }
-        )
+            TextFieldDefaults.decorator(
+                state = state,
+                outputTransformation = null,
+                lineLimits = lineLimits,
+                enabled = enabled,
+                isError = isError,
+                interactionSource = interactionSource,
+                container = {
+                    TextFieldDefaults.Container(
+                        enabled = enabled,
+                        isError = isError,
+                        interactionSource = interactionSource,
+                        // Update indicator line thickness
+                        unfocusedIndicatorLineThickness = 2.dp,
+                        focusedIndicatorLineThickness = 4.dp,
+                    )
+                }
+            )
     )
 }
 
@@ -396,25 +394,25 @@ fun CustomOutlinedTextFieldUsingDecorator() {
         lineLimits = lineLimits,
         textStyle = LocalTextStyle.current,
         decorator =
-        OutlinedTextFieldDefaults.decorator(
-            state = state,
-            outputTransformation = null,
-            lineLimits = lineLimits,
-            enabled = enabled,
-            isError = isError,
-            interactionSource = interactionSource,
-            container = {
-                OutlinedTextFieldDefaults.Container(
-                    enabled = enabled,
-                    isError = isError,
-                    interactionSource = interactionSource,
-                    // Update border thickness and shape
-                    shape = RectangleShape,
-                    unfocusedBorderThickness = 2.dp,
-                    focusedBorderThickness = 4.dp
-                )
-            },
-        )
+            OutlinedTextFieldDefaults.decorator(
+                state = state,
+                outputTransformation = null,
+                lineLimits = lineLimits,
+                enabled = enabled,
+                isError = isError,
+                interactionSource = interactionSource,
+                container = {
+                    OutlinedTextFieldDefaults.Container(
+                        enabled = enabled,
+                        isError = isError,
+                        interactionSource = interactionSource,
+                        // Update border thickness and shape
+                        shape = RectangleShape,
+                        unfocusedBorderThickness = 2.dp,
+                        focusedBorderThickness = 4.dp
+                    )
+                },
+            )
     )
 }
 

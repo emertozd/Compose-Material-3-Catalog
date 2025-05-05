@@ -18,6 +18,7 @@ package com.emertozd.compose.catalog.samples
 import android.content.res.Configuration
 import android.os.Build
 import android.os.LocaleList
+import androidx.annotation.RequiresApi
 import com.emertozd.compose.catalog.library.Sampled
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -67,6 +68,8 @@ import java.time.ZoneId
 import java.util.Calendar
 import java.util.TimeZone
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.ZoneOffset
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -83,6 +86,28 @@ fun DatePickerSample() {
 
         Text(
             "Selected date timestamp: ${datePickerState.selectedDateMillis ?: "no selection"}",
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Sampled
+@Composable
+fun DatePickerApi26Sample() {
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        // Pre-select a date for April 15, 2023
+        val datePickerState =
+            rememberDatePickerState(initialSelectedDateMillis = LocalDate.of(2023, 4, 15).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli())
+        DatePicker(state = datePickerState, modifier = Modifier.padding(16.dp))
+
+        Text(
+            "Selected date: ${datePickerState.selectedDateMillis ?: "no selection"}",
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
@@ -142,7 +167,6 @@ fun DatePickerDialogSample() {
     }
 }
 
-@Suppress("ClassVerificationFailure")
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Sampled
@@ -151,29 +175,29 @@ fun DatePickerWithDateSelectableDatesSample() {
     val datePickerState =
         rememberDatePickerState(
             selectableDates =
-            object : SelectableDates {
-                // Blocks Sunday and Saturday from being selected.
-                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        val dayOfWeek =
-                            Instant.ofEpochMilli(utcTimeMillis)
-                                .atZone(ZoneId.of("UTC"))
-                                .toLocalDate()
-                                .dayOfWeek
-                        dayOfWeek != DayOfWeek.SUNDAY && dayOfWeek != DayOfWeek.SATURDAY
-                    } else {
-                        val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-                        calendar.timeInMillis = utcTimeMillis
-                        calendar[Calendar.DAY_OF_WEEK] != Calendar.SUNDAY &&
-                                calendar[Calendar.DAY_OF_WEEK] != Calendar.SATURDAY
+                object : SelectableDates {
+                    // Blocks Sunday and Saturday from being selected.
+                    override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            val dayOfWeek =
+                                Instant.ofEpochMilli(utcTimeMillis)
+                                    .atZone(ZoneId.of("UTC"))
+                                    .toLocalDate()
+                                    .dayOfWeek
+                            dayOfWeek != DayOfWeek.SUNDAY && dayOfWeek != DayOfWeek.SATURDAY
+                        } else {
+                            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+                            calendar.timeInMillis = utcTimeMillis
+                            calendar[Calendar.DAY_OF_WEEK] != Calendar.SUNDAY &&
+                                    calendar[Calendar.DAY_OF_WEEK] != Calendar.SATURDAY
+                        }
+                    }
+
+                    // Allow selecting dates from year 2023 forward.
+                    override fun isSelectableYear(year: Int): Boolean {
+                        return year > 2022
                     }
                 }
-
-                // Allow selecting dates from year 2023 forward.
-                override fun isSelectableYear(year: Int): Boolean {
-                    return year > 2022
-                }
-            }
         )
 
     Column(
@@ -219,9 +243,9 @@ fun DateRangePickerSample() {
         // Add a row with "Save" and dismiss actions.
         Row(
             modifier =
-            Modifier.fillMaxWidth()
-                .background(DatePickerDefaults.colors().containerColor)
-                .padding(start = 12.dp, end = 12.dp),
+                Modifier.fillMaxWidth()
+                    .background(DatePickerDefaults.colors().containerColor)
+                    .padding(start = 12.dp, end = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -247,6 +271,56 @@ fun DateRangePickerSample() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Sampled
+@Composable
+fun DateRangePickerApi26Sample() {
+    // Decoupled snackbar host state from scaffold state for demo purposes.
+    val snackState = remember { SnackbarHostState() }
+    val snackScope = rememberCoroutineScope()
+    SnackbarHost(hostState = snackState, Modifier.zIndex(1f))
+
+    // Creates a state with pre-selected date range.
+    val state =
+        rememberDateRangePickerState(
+            initialSelectedStartDateMillis = LocalDate.of(2023, 4, 15).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli(),
+            initialSelectedEndDateMillis = LocalDate.of(2023, 4, 20).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
+        )
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top) {
+        // Add a row with "Save" and dismiss actions.
+        Row(
+            modifier =
+                Modifier.fillMaxWidth()
+                    .background(DatePickerDefaults.colors().containerColor)
+                    .padding(start = 12.dp, end = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconButton(onClick = { /* dismiss the UI */ }) {
+                androidx.compose.material.Icon(
+                    Icons.Filled.Close,
+                    contentDescription = "Localized description"
+                )
+            }
+            TextButton(
+                onClick = {
+                    snackScope.launch {
+                        val range = state.selectedStartDateMillis!!..state.selectedEndDateMillis!!
+                        snackState.showSnackbar("Saved range: $range")
+                    }
+                },
+                enabled = state.selectedEndDateMillis != null
+            ) {
+                Text(text = "Save")
+            }
+        }
+        DateRangePicker(state = state, modifier = Modifier.weight(1f))
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.N)
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Sampled
@@ -280,6 +354,46 @@ fun DatePickerCustomLocaleSample() {
 
             Text(
                 "Selected date timestamp: ${datePickerState.selectedDateMillis ?: "no selection"}",
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Sampled
+@Composable
+fun DatePickerCustomLocaleApi26Sample() {
+    val preferredLocales = LocaleList.forLanguageTags("HE")
+    val config = Configuration()
+    config.setLocales(preferredLocales)
+    val newContext = LocalContext.current.createConfigurationContext(config)
+    CompositionLocalProvider(
+        LocalContext provides newContext,
+        LocalConfiguration provides config,
+        LocalLayoutDirection provides LayoutDirection.Rtl
+    ) {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Pre-select a date for January 4, 2020
+            // Initialize date picker with the preferred locale. Here we create a state directly,
+            // but since the Locale was set at the CompositionLocalProvider through a Configuration,
+            // a `val datePickerState = rememberDatePickerState(...)` will have the same effect.
+            val datePickerState = remember {
+                DatePickerState(
+                    initialSelectedDateMillis = LocalDate.of(2020, 1, 4).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli(),
+                    // Set to "HE" locale.
+                    locale = preferredLocales.get(0)
+                )
+            }
+            DatePicker(state = datePickerState, modifier = Modifier.padding(16.dp))
+
+            Text(
+                "Selected date: ${datePickerState.selectedDateMillis ?: "no selection"}",
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }

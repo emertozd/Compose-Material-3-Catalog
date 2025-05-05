@@ -83,7 +83,7 @@ fun MaterialExpressiveThemeColorSchemeSample() {
     fun MyMaterialTheme(content: @Composable () -> Unit) {
         MaterialExpressiveTheme(
             colorScheme =
-            if (isSystemInDarkTheme()) darkColorScheme() else expressiveLightColorScheme()
+                if (isSystemInDarkTheme()) darkColorScheme() else expressiveLightColorScheme()
         ) {
             content()
         }
