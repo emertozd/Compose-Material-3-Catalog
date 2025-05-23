@@ -578,6 +578,7 @@ private val MaterialShapes =
         docsUrl = "$PackageSummaryUrl#shapes",
         sourceUrl = "$Material3SourceUrl/Shapes.kt",
         examples = MaterialShapesExamples,
+        additionalInfo = "Unofficial"
     )
 
 /** Components for the catalog, ordered alphabetically by name. */
