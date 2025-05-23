@@ -108,7 +108,7 @@ fun WideNavigationRailResponsiveSample() {
                                 state.collapse()
                             else state.expand()
                         }
-                    }
+                    },
                 ) {
                     if (state.targetValue == WideNavigationRailValue.Expanded) {
                         Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
@@ -116,7 +116,7 @@ fun WideNavigationRailResponsiveSample() {
                         Icon(Icons.Filled.Menu, "Expand rail")
                     }
                 }
-            }
+            },
         ) {
             items.forEachIndexed { index, item ->
                 WideNavigationRailItem(
@@ -132,7 +132,7 @@ fun WideNavigationRailResponsiveSample() {
                     },
                     label = { Text(item) },
                     selected = selectedItem == index,
-                    onClick = { selectedItem = index }
+                    onClick = { selectedItem = index },
                 )
             }
         }
@@ -151,7 +151,7 @@ fun WideNavigationRailResponsiveSample() {
                 text =
                     "Note: The orientation of this demo has been locked to portrait mode, because" +
                             " landscape mode may result in a compact height in certain devices. For" +
-                            " any compact screen dimensions, use a Navigation Bar instead."
+                            " any compact screen dimensions, use a Navigation Bar instead.",
             )
         }
     }
@@ -206,7 +206,7 @@ fun ModalWideNavigationRailSample() {
                                 state.collapse()
                             else state.expand()
                         }
-                    }
+                    },
                 ) {
                     if (state.targetValue == WideNavigationRailValue.Expanded) {
                         Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
@@ -214,7 +214,7 @@ fun ModalWideNavigationRailSample() {
                         Icon(Icons.Filled.Menu, "Expand rail")
                     }
                 }
-            }
+            },
         ) {
             items.forEachIndexed { index, item ->
                 WideNavigationRailItem(
@@ -223,12 +223,12 @@ fun ModalWideNavigationRailSample() {
                         Icon(
                             if (selectedItem == index) selectedIcons[index]
                             else unselectedIcons[index],
-                            contentDescription = item
+                            contentDescription = item,
                         )
                     },
                     label = { Text(item) },
                     selected = selectedItem == index,
-                    onClick = { selectedItem = index }
+                    onClick = { selectedItem = index },
                 )
             }
         }
@@ -246,7 +246,7 @@ fun ModalWideNavigationRailSample() {
                 text =
                     "Note: The orientation of this demo has been locked to portrait mode, because" +
                             " landscape mode may result in a compact height in certain devices. For" +
-                            " any compact screen dimensions, use a Navigation Bar instead."
+                            " any compact screen dimensions, use a Navigation Bar instead.",
             )
         }
 
@@ -285,7 +285,7 @@ fun DismissibleModalWideNavigationRailSample() {
                         Icon(
                             if (selectedItem == index) selectedIcons[index]
                             else unselectedIcons[index],
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     },
                     label = { Text(item) },
@@ -293,7 +293,7 @@ fun DismissibleModalWideNavigationRailSample() {
                     onClick = {
                         selectedItem = index
                         scope.launch { state.collapse() }
-                    }
+                    },
                 )
             }
         }
@@ -323,12 +323,12 @@ fun WideNavigationRailCollapsedSample() {
                 icon = {
                     Icon(
                         if (selectedItem == index) selectedIcons[index] else unselectedIcons[index],
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
-                onClick = { selectedItem = index }
+                onClick = { selectedItem = index },
             )
         }
     }
@@ -353,12 +353,12 @@ fun WideNavigationRailExpandedSample() {
                 icon = {
                     Icon(
                         if (selectedItem == index) selectedIcons[index] else unselectedIcons[index],
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
-                onClick = { selectedItem = index }
+                onClick = { selectedItem = index },
             )
         }
     }
@@ -402,7 +402,7 @@ fun WideNavigationRailArrangementsSample() {
                                 state.expand()
                             }
                         }
-                    }
+                    },
                 ) {
                     if (state.targetValue == WideNavigationRailValue.Expanded) {
                         Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
@@ -410,7 +410,7 @@ fun WideNavigationRailArrangementsSample() {
                         Icon(Icons.Filled.Menu, "Expand rail")
                     }
                 }
-            }
+            },
         ) {
             items.forEachIndexed { index, item ->
                 WideNavigationRailItem(
@@ -419,12 +419,12 @@ fun WideNavigationRailArrangementsSample() {
                         Icon(
                             if (selectedItem == index) selectedIcons[index]
                             else unselectedIcons[index],
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     },
                     label = { Text(item) },
                     selected = selectedItem == index,
-                    onClick = { selectedItem = index }
+                    onClick = { selectedItem = index },
                 )
             }
         }
@@ -441,7 +441,7 @@ fun WideNavigationRailArrangementsSample() {
                     } else {
                         arrangement = Arrangement.Center
                     }
-                }
+                },
             ) {
                 Text(changeToString)
             }
@@ -451,7 +451,7 @@ fun WideNavigationRailArrangementsSample() {
                     "Note: The orientation of this Navigation Rail demo has been locked to" +
                             " portrait mode, because landscape mode may result in a compact height in" +
                             " certain devices. For any compact screen dimensions, use a Navigation" +
-                            "Bar instead."
+                            "Bar instead.",
             )
         }
     }
@@ -483,12 +483,12 @@ fun NavigationRailSample() {
                 icon = {
                     Icon(
                         if (selectedItem == index) selectedIcons[index] else unselectedIcons[index],
-                        contentDescription = item
+                        contentDescription = item,
                     )
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
-                onClick = { selectedItem = index }
+                onClick = { selectedItem = index },
             )
         }
     }
@@ -507,13 +507,13 @@ fun NavigationRailWithOnlySelectedLabelsSample() {
                 icon = {
                     Icon(
                         if (selectedItem == index) selectedIcons[index] else unselectedIcons[index],
-                        contentDescription = item
+                        contentDescription = item,
                     )
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
                 onClick = { selectedItem = index },
-                alwaysShowLabel = false
+                alwaysShowLabel = false,
             )
         }
     }
@@ -535,13 +535,13 @@ fun NavigationRailBottomAlignSample() {
                 icon = {
                     Icon(
                         if (selectedItem == index) selectedIcons[index] else unselectedIcons[index],
-                        contentDescription = item
+                        contentDescription = item,
                     )
                 },
                 label = { Text(item) },
                 selected = selectedItem == index,
                 onClick = { selectedItem = index },
-                alwaysShowLabel = false
+                alwaysShowLabel = false,
             )
         }
     }

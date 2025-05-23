@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Coffee
 import androidx.compose.material.icons.filled.Home
@@ -38,11 +37,9 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Work
 import androidx.compose.material3.ButtonGroup
 import androidx.compose.material3.ButtonGroupDefaults
-import androidx.compose.material3.ButtonShapes
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButton
 import androidx.compose.material3.ToggleButtonDefaults
@@ -53,9 +50,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.fastForEachIndexed
 import com.emertozd.compose.catalog.library.Sampled
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -66,7 +65,7 @@ fun ButtonGroupSample() {
     val numButtons = 10
     ButtonGroup(
         overflowIndicator = { menuState ->
-            IconButton(
+            FilledIconButton(
                 onClick = {
                     if (menuState.isExpanded) {
                         menuState.dismiss()
@@ -77,7 +76,7 @@ fun ButtonGroupSample() {
             ) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Localized description"
+                    contentDescription = "Localized description",
                 )
             }
         }
@@ -108,17 +107,17 @@ fun SingleSelectConnectedButtonGroupSample() {
             ToggleButton(
                 checked = selectedIndex == index,
                 onCheckedChange = { selectedIndex = index },
-                modifier = modifiers[index],
+                modifier = modifiers[index].semantics { role = Role.RadioButton },
                 shapes =
                     when (index) {
                         0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
                         options.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
                         else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
-                    }
+                    },
             ) {
                 Icon(
                     if (selectedIndex == index) checkedIcons[index] else unCheckedIcons[index],
-                    contentDescription = "Localized description"
+                    contentDescription = "Localized description",
                 )
                 Spacer(Modifier.size(ToggleButtonDefaults.IconSpacing))
                 Text(label)
@@ -138,7 +137,7 @@ fun SingleSelectConnectedButtonGroupWithFlowLayoutSample() {
             Icons.Outlined.Restaurant,
             Icons.Outlined.Coffee,
             Icons.Outlined.Search,
-            Icons.Outlined.Home
+            Icons.Outlined.Home,
         )
     val checkedIcons =
         listOf(
@@ -146,14 +145,14 @@ fun SingleSelectConnectedButtonGroupWithFlowLayoutSample() {
             Icons.Filled.Restaurant,
             Icons.Filled.Coffee,
             Icons.Filled.Search,
-            Icons.Filled.Home
+            Icons.Filled.Home,
         )
     var selectedIndex by remember { mutableIntStateOf(0) }
 
     FlowRow(
         Modifier.padding(horizontal = 8.dp).fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         options.forEachIndexed { index, label ->
             ToggleButton(
@@ -164,11 +163,12 @@ fun SingleSelectConnectedButtonGroupWithFlowLayoutSample() {
                         0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
                         options.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
                         else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
-                    }
+                    },
+                modifier = Modifier.semantics { role = Role.RadioButton },
             ) {
                 Icon(
                     if (selectedIndex == index) checkedIcons[index] else unCheckedIcons[index],
-                    contentDescription = "Localized description"
+                    contentDescription = "Localized description",
                 )
                 Spacer(Modifier.size(ToggleButtonDefaults.IconSpacing))
                 Text(label)
@@ -189,7 +189,7 @@ fun MultiSelectConnectedButtonGroupSample() {
 
     Row(
         Modifier.padding(horizontal = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween)
+        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
     ) {
         val modifiers = listOf(Modifier.weight(1f), Modifier.weight(1.5f), Modifier.weight(1f))
         options.forEachIndexed { index, label ->
@@ -202,11 +202,11 @@ fun MultiSelectConnectedButtonGroupSample() {
                         0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
                         options.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
                         else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
-                    }
+                    },
             ) {
                 Icon(
                     if (checked[index]) checkedIcons[index] else unCheckedIcons[index],
-                    contentDescription = "Localized description"
+                    contentDescription = "Localized description",
                 )
                 Spacer(Modifier.size(ToggleButtonDefaults.IconSpacing))
                 Text(label)

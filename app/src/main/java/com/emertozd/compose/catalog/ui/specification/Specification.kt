@@ -38,10 +38,9 @@ import com.emertozd.compose.catalog.R
 import com.emertozd.compose.catalog.model.Specification
 
 @Composable
-@OptIn(ExperimentalFoundationApi::class)
 fun Specification(
     specifications: List<Specification>,
-    onSpecificationClick: (specification: Specification) -> Unit
+    onSpecificationClick: (specification: Specification) -> Unit,
 ) {
     SpecificationScaffold(topBarTitle = stringResource(id = R.string.compose_material_catalog)) {
             paddingValues ->
@@ -50,7 +49,7 @@ fun Specification(
                 item {
                     Text(
                         text = stringResource(id = R.string.specifications),
-                        style = MaterialTheme.typography.bodyLarge
+                        style = MaterialTheme.typography.bodyLarge,
                     )
                     Spacer(modifier = Modifier.height(SpecificationPadding))
                 }
@@ -60,17 +59,17 @@ fun Specification(
                 }
             },
             contentPadding =
-            WindowInsets.safeDrawing
-                .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
-                .add(
-                    WindowInsets(
-                        left = SpecificationPadding,
-                        top = SpecificationPadding,
-                        right = SpecificationPadding,
+                WindowInsets.safeDrawing
+                    .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
+                    .add(
+                        WindowInsets(
+                            left = SpecificationPadding,
+                            top = SpecificationPadding,
+                            right = SpecificationPadding,
+                        )
                     )
-                )
-                .asPaddingValues(),
-            modifier = Modifier.padding(paddingValues)
+                    .asPaddingValues(),
+            modifier = Modifier.padding(paddingValues),
         )
     }
 }

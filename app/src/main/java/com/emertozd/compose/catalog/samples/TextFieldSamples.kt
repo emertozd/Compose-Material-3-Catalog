@@ -148,7 +148,7 @@ fun TextFieldWithIcons() {
             IconButton(onClick = { state.clearText() }) {
                 Icon(Icons.Filled.Clear, contentDescription = "Clear text")
             }
-        }
+        },
     )
 }
 
@@ -168,7 +168,7 @@ fun TextFieldWithPlaceholder() {
             lineLimits = TextFieldLineLimits.SingleLine,
             label = { Text("Email") },
             labelPosition = TextFieldLabelPosition.Attached(alwaysMinimize = alwaysMinimizeLabel),
-            placeholder = { Text("example@gmail.com") }
+            placeholder = { Text("example@gmail.com") },
         )
     }
 }
@@ -231,7 +231,7 @@ fun TextFieldWithErrorState() {
                 maxTextLength = charLimit
                 // Provide localized description of the error
                 if (isError) error(errorMessage)
-            }
+            },
     )
 }
 
@@ -268,7 +268,7 @@ fun PasswordTextField() {
                 val description = if (passwordHidden) "Show password" else "Hide password"
                 Icon(imageVector = visibilityIcon, contentDescription = description)
             }
-        }
+        },
     )
 }
 
@@ -277,11 +277,7 @@ fun PasswordTextField() {
 @Composable
 fun TextFieldWithInitialValueAndSelection() {
     val state = rememberTextFieldState("Initial text", TextRange(0, 12))
-    TextField(
-        state = state,
-        lineLimits = TextFieldLineLimits.SingleLine,
-        label = { Text("Label") },
-    )
+    TextField(state = state, lineLimits = TextFieldLineLimits.SingleLine, label = { Text("Label") })
 }
 
 @Preview
@@ -319,7 +315,7 @@ fun TextFieldWithHideKeyboardOnImeAction() {
         state = rememberTextFieldState(),
         label = { Text("Label") },
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-        onKeyboardAction = { keyboardController?.hide() }
+        onKeyboardAction = { keyboardController?.hide() },
     )
 }
 
@@ -371,8 +367,8 @@ fun CustomTextFieldUsingDecorator() {
                         unfocusedIndicatorLineThickness = 2.dp,
                         focusedIndicatorLineThickness = 4.dp,
                     )
-                }
-            )
+                },
+            ),
     )
 }
 
@@ -409,10 +405,10 @@ fun CustomOutlinedTextFieldUsingDecorator() {
                         // Update border thickness and shape
                         shape = RectangleShape,
                         unfocusedBorderThickness = 2.dp,
-                        focusedBorderThickness = 4.dp
+                        focusedBorderThickness = 4.dp,
                     )
                 },
-            )
+            ),
     )
 }
 
@@ -452,9 +448,9 @@ fun CustomTextFieldBasedOnDecorationBox() {
                         unfocusedIndicatorLineThickness = 2.dp,
                         focusedIndicatorLineThickness = 4.dp,
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -493,10 +489,10 @@ fun CustomOutlinedTextFieldBasedOnDecorationBox() {
                         // Update border thickness and shape
                         shape = RectangleShape,
                         unfocusedBorderThickness = 2.dp,
-                        focusedBorderThickness = 4.dp
+                        focusedBorderThickness = 4.dp,
                     )
                 },
             )
-        }
+        },
     )
 }

@@ -18,12 +18,12 @@ package com.emertozd.compose.catalog.library.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -33,11 +33,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import com.emertozd.compose.catalog.library.model.Component
-import com.emertozd.compose.catalog.library.model.Example
-import com.emertozd.compose.catalog.library.model.Theme
-import com.emertozd.compose.catalog.library.ui.common.CatalogScaffold
-import com.emertozd.compose.catalog.library.ui.example.ExampleItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,6 +42,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.emertozd.compose.catalog.R
+import com.emertozd.compose.catalog.library.model.Component
+import com.emertozd.compose.catalog.library.model.Example
+import com.emertozd.compose.catalog.library.model.Theme
+import com.emertozd.compose.catalog.library.ui.common.CatalogScaffold
+import com.emertozd.compose.catalog.library.ui.example.ExampleItem
 
 @Composable
 fun Component(
@@ -69,40 +69,40 @@ fun Component(
         onThemeChange = onThemeChange,
         onBackClick = onBackClick,
         favorite = favorite,
-        onFavoriteClick = onFavoriteClick
+        onFavoriteClick = onFavoriteClick,
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier.consumeWindowInsets(paddingValues),
             contentPadding =
-            PaddingValues(
-                start = paddingValues.calculateStartPadding(ltr) + ComponentPadding,
-                top = paddingValues.calculateTopPadding() + ComponentPadding,
-                end = paddingValues.calculateEndPadding(ltr) + ComponentPadding,
-                bottom = paddingValues.calculateBottomPadding() + ComponentPadding
-            )
+                PaddingValues(
+                    start = paddingValues.calculateStartPadding(ltr) + ComponentPadding,
+                    top = paddingValues.calculateTopPadding() + ComponentPadding,
+                    end = paddingValues.calculateEndPadding(ltr) + ComponentPadding,
+                    bottom = paddingValues.calculateBottomPadding() + ComponentPadding,
+                ),
         ) {
             item {
                 Box(
                     modifier =
-                    Modifier.fillMaxWidth().padding(vertical = ComponentIconVerticalPadding)
+                        Modifier.fillMaxWidth().padding(vertical = ComponentIconVerticalPadding)
                 ) {
                     Image(
                         painter = painterResource(id = component.icon),
                         contentDescription = null,
                         modifier = Modifier.size(ComponentIconSize).align(Alignment.Center),
                         colorFilter =
-                        if (component.tintIcon) {
-                            ColorFilter.tint(LocalContentColor.current)
-                        } else {
-                            null
-                        }
+                            if (component.tintIcon) {
+                                ColorFilter.tint(LocalContentColor.current)
+                            } else {
+                                null
+                            },
                     )
                 }
             }
             item {
                 Text(
                     text = stringResource(id = R.string.description),
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
                 )
                 Spacer(modifier = Modifier.height(ComponentPadding))
                 Text(text = component.description, style = MaterialTheme.typography.bodyMedium)
@@ -111,22 +111,35 @@ fun Component(
             item {
                 Text(
                     text = stringResource(id = R.string.examples),
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
                 )
                 Spacer(modifier = Modifier.height(ComponentPadding))
             }
-            if (component.examples.isNotEmpty()) {
-                items(component.examples) { example ->
-                    ExampleItem(example = example, onClick = onExampleClick)
+            // In case the theme has a showOnlyExpressiveComponents setting, filter the
+            // examples list to include only those that are expressive.
+            val filteredExamples =
+                if (theme.showOnlyExpressiveComponents) {
+                    component.examples.filter { it.isExpressive }
+                } else {
+                    component.examples
+                }
+            if (filteredExamples.isNotEmpty()) {
+                items(filteredExamples) { example ->
+                    ExampleItem(
+                        example = example,
+                        markExpressiveComponents = theme.markExpressiveComponents,
+                        onClick = onExampleClick,
+                    )
                     Spacer(modifier = Modifier.height(ExampleItemPadding))
                 }
             } else {
                 item {
-                    Text(
-                        text = stringResource(id = R.string.no_examples),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Spacer(modifier = Modifier.height(ComponentPadding))
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text(
+                            text = stringResource(id = R.string.no_examples),
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
                 }
             }
         }

@@ -59,10 +59,7 @@ fun ExposedDropdownMenuSample() {
     var expanded by remember { mutableStateOf(false) }
     val textFieldState = rememberTextFieldState(options[0])
 
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = it },
-    ) {
+    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
         TextField(
             // The `menuAnchor` modifier must be passed to the text field to handle
             // expanding/collapsing the menu on click. A read-only text field has
@@ -75,10 +72,7 @@ fun ExposedDropdownMenuSample() {
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             colors = ExposedDropdownMenuDefaults.textFieldColors(),
         )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
+        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             options.forEach { option ->
                 DropdownMenuItem(
                     text = { Text(option, style = MaterialTheme.typography.bodyLarge) },
@@ -107,10 +101,7 @@ fun EditableExposedDropdownMenuSample() {
     val (allowExpanded, setExpanded) = remember { mutableStateOf(false) }
     val expanded = allowExpanded && filteredOptions.isNotEmpty()
 
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = setExpanded,
-    ) {
+    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = setExpanded) {
         TextField(
             // The `menuAnchor` modifier must be passed to the text field to handle
             // expanding/collapsing the menu on click. An editable text field has
@@ -200,10 +191,7 @@ fun MultiAutocompleteExposedDropdownMenuSample() {
     val (allowExpanded, setExpanded) = remember { mutableStateOf(false) }
     val expanded = allowExpanded && filteredOptions.isNotEmpty()
 
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = setExpanded,
-    ) {
+    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = setExpanded) {
         TextField(
             modifier =
                 Modifier.width(280.dp).menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
@@ -231,7 +219,7 @@ fun MultiAutocompleteExposedDropdownMenuSample() {
                             textFieldState.replaceThenAddComma(
                                 tokenSelection.start,
                                 tokenSelection.end,
-                                option
+                                option,
                             )
                         }
                     },
@@ -294,5 +282,5 @@ private val SampleData =
         "W123",
         "X456",
         "Y789",
-        "Z000"
+        "Z000",
     )

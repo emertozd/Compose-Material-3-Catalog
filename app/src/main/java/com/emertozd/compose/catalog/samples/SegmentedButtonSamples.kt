@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.TrendingUp
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.StarBorder
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MultiChoiceSegmentedButtonRow
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -73,7 +74,7 @@ fun SegmentedButtonMultiSelectSample() {
                 shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
                 icon = {
                     SegmentedButtonDefaults.Icon(active = index in checkedList) {
-                        androidx.compose.material3.Icon(
+                        Icon(
                             imageVector = icons[index],
                             contentDescription = null,
                             modifier = Modifier.size(SegmentedButtonDefaults.IconSize),

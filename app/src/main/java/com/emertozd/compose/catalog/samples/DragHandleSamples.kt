@@ -68,16 +68,16 @@ fun VerticalDragHandleSample() {
                 VerticalDragHandle(
                     modifier =
                         Modifier.draggable(
-                                orientation = Orientation.Horizontal,
-                                state =
-                                    rememberDraggableState { delta ->
-                                        offsetX =
-                                            (offsetX + delta).coerceIn(
-                                                with(density) { 48.dp.toPx() },
-                                                screenSize.width.toFloat(),
-                                            )
-                                    },
-                            )
+                            orientation = Orientation.Horizontal,
+                            state =
+                                rememberDraggableState { delta ->
+                                    offsetX =
+                                        (offsetX + delta).coerceIn(
+                                            with(density) { 48.dp.toPx() },
+                                            screenSize.width.toFloat(),
+                                        )
+                                },
+                        )
                             .systemGestureExclusion() // To avoid colliding with the back gesture
                 )
             }

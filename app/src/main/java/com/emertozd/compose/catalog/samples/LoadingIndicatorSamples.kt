@@ -83,15 +83,15 @@ fun ContainedLoadingIndicatorSample() {
 fun DeterminateLoadingIndicatorSample() {
     var progress by remember { mutableFloatStateOf(0f) }
     val animatedProgress by
-        animateFloatAsState(
-            targetValue = progress,
-            animationSpec =
-                spring(
-                    dampingRatio = Spring.DampingRatioNoBouncy,
-                    stiffness = Spring.StiffnessVeryLow,
-                    visibilityThreshold = 1 / 1000f,
-                ),
-        )
+    animateFloatAsState(
+        targetValue = progress,
+        animationSpec =
+            spring(
+                dampingRatio = Spring.DampingRatioNoBouncy,
+                stiffness = Spring.StiffnessVeryLow,
+                visibilityThreshold = 1 / 1000f,
+            ),
+    )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         LoadingIndicator(progress = { animatedProgress })
@@ -113,15 +113,15 @@ fun DeterminateLoadingIndicatorSample() {
 fun DeterminateContainedLoadingIndicatorSample() {
     var progress by remember { mutableFloatStateOf(0f) }
     val animatedProgress by
-        animateFloatAsState(
-            targetValue = progress,
-            animationSpec =
-                spring(
-                    dampingRatio = Spring.DampingRatioNoBouncy,
-                    stiffness = Spring.StiffnessVeryLow,
-                    visibilityThreshold = 1 / 1000f,
-                ),
-        )
+    animateFloatAsState(
+        targetValue = progress,
+        animationSpec =
+            spring(
+                dampingRatio = Spring.DampingRatioNoBouncy,
+                stiffness = Spring.StiffnessVeryLow,
+                visibilityThreshold = 1 / 1000f,
+            ),
+    )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         ContainedLoadingIndicator(progress = { animatedProgress })

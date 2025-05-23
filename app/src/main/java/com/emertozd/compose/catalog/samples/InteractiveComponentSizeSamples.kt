@@ -89,10 +89,10 @@ fun MinimumInteractiveComponentSizeCheckboxRowSample() {
         verticalAlignment = Alignment.CenterVertically,
         modifier =
             Modifier.toggleable(
-                    value = checked,
-                    onValueChange = { checked = it },
-                    role = Role.Checkbox,
-                )
+                value = checked,
+                onValueChange = { checked = it },
+                role = Role.Checkbox,
+            )
                 .minimumInteractiveComponentSize(),
     ) {
         // Cannot rely on Checkbox for touch target expansion because it only enforces

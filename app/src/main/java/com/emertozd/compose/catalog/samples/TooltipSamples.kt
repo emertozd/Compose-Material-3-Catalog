@@ -50,9 +50,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun PlainTooltipSample() {
     TooltipBox(
-        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
         tooltip = { PlainTooltip { Text("Add to favorites") } },
-        state = rememberTooltipState()
+        state = rememberTooltipState(),
     ) {
         IconButton(onClick = { /* Icon button's click event */ }) {
             Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Localized Description")
@@ -69,9 +69,9 @@ fun PlainTooltipWithManualInvocationSample() {
     val scope = rememberCoroutineScope()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TooltipBox(
-            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+            positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
             tooltip = { PlainTooltip { Text("Add to list") } },
-            state = tooltipState
+            state = tooltipState,
         ) {
             Icon(imageVector = Icons.Filled.AddCircle, contentDescription = "Localized Description")
         }
@@ -87,11 +87,11 @@ fun PlainTooltipWithManualInvocationSample() {
 @Composable
 fun PlainTooltipWithCaret() {
     TooltipBox(
-        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
         tooltip = {
             PlainTooltip(caretSize = TooltipDefaults.caretSize) { Text("Add to favorites") }
         },
-        state = rememberTooltipState()
+        state = rememberTooltipState(),
     ) {
         IconButton(onClick = { /* Icon button's click event */ }) {
             Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Localized Description")
@@ -104,9 +104,9 @@ fun PlainTooltipWithCaret() {
 @Composable
 fun PlainTooltipWithCustomCaret() {
     TooltipBox(
-        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
         tooltip = { PlainTooltip(caretSize = DpSize(24.dp, 12.dp)) { Text("Add to favorites") } },
-        state = rememberTooltipState()
+        state = rememberTooltipState(),
     ) {
         IconButton(onClick = { /* Icon button's click event */ }) {
             Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Localized Description")
@@ -121,7 +121,7 @@ fun RichTooltipSample() {
     val tooltipState = rememberTooltipState(isPersistent = true)
     val scope = rememberCoroutineScope()
     TooltipBox(
-        positionProvider = TooltipDefaults.rememberRichTooltipPositionProvider(),
+        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
         tooltip = {
             RichTooltip(
                 title = { Text(richTooltipSubheadText) },
@@ -129,12 +129,12 @@ fun RichTooltipSample() {
                     TextButton(onClick = { scope.launch { tooltipState.dismiss() } }) {
                         Text(richTooltipActionText)
                     }
-                }
+                },
             ) {
                 Text(richTooltipText)
             }
         },
-        state = tooltipState
+        state = tooltipState,
     ) {
         IconButton(onClick = { /* Icon button's click event */ }) {
             Icon(imageVector = Icons.Filled.Info, contentDescription = "Localized Description")
@@ -150,7 +150,7 @@ fun RichTooltipWithManualInvocationSample() {
     val scope = rememberCoroutineScope()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TooltipBox(
-            positionProvider = TooltipDefaults.rememberRichTooltipPositionProvider(),
+            positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
             tooltip = {
                 RichTooltip(
                     title = { Text(richTooltipSubheadText) },
@@ -158,12 +158,12 @@ fun RichTooltipWithManualInvocationSample() {
                         TextButton(onClick = { scope.launch { tooltipState.dismiss() } }) {
                             Text(richTooltipActionText)
                         }
-                    }
+                    },
                 ) {
                     Text(richTooltipText)
                 }
             },
-            state = tooltipState
+            state = tooltipState,
         ) {
             Icon(imageVector = Icons.Filled.Info, contentDescription = "Localized Description")
         }
@@ -181,7 +181,7 @@ fun RichTooltipWithCaretSample() {
     val tooltipState = rememberTooltipState(isPersistent = true)
     val scope = rememberCoroutineScope()
     TooltipBox(
-        positionProvider = TooltipDefaults.rememberRichTooltipPositionProvider(),
+        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
         tooltip = {
             RichTooltip(
                 title = { Text(richTooltipSubheadText) },
@@ -190,12 +190,12 @@ fun RichTooltipWithCaretSample() {
                         Text(richTooltipActionText)
                     }
                 },
-                caretSize = TooltipDefaults.caretSize
+                caretSize = TooltipDefaults.caretSize,
             ) {
                 Text(richTooltipText)
             }
         },
-        state = tooltipState
+        state = tooltipState,
     ) {
         IconButton(onClick = { /* Icon button's click event */ }) {
             Icon(imageVector = Icons.Filled.Info, contentDescription = "Localized Description")
@@ -210,7 +210,7 @@ fun RichTooltipWithCustomCaretSample() {
     val tooltipState = rememberTooltipState(isPersistent = true)
     val scope = rememberCoroutineScope()
     TooltipBox(
-        positionProvider = TooltipDefaults.rememberRichTooltipPositionProvider(),
+        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
         tooltip = {
             RichTooltip(
                 title = { Text(richTooltipSubheadText) },
@@ -219,12 +219,12 @@ fun RichTooltipWithCustomCaretSample() {
                         Text(richTooltipActionText)
                     }
                 },
-                caretSize = DpSize(32.dp, 16.dp)
+                caretSize = DpSize(32.dp, 16.dp),
             ) {
                 Text(richTooltipText)
             }
         },
-        state = tooltipState
+        state = tooltipState,
     ) {
         IconButton(onClick = { /* Icon button's click event */ }) {
             Icon(imageVector = Icons.Filled.Info, contentDescription = "Localized Description")

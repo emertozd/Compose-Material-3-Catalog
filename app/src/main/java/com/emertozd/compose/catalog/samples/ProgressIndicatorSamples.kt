@@ -56,13 +56,11 @@ fun LinearProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        LinearProgressIndicator(
-            progress = { animatedProgress },
-        )
+        LinearProgressIndicator(progress = { animatedProgress })
         Spacer(Modifier.requiredHeight(30.dp))
         Text("Set progress:")
         Slider(
@@ -83,13 +81,11 @@ fun LinearWavyProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        LinearWavyProgressIndicator(
-            progress = { animatedProgress },
-        )
+        LinearWavyProgressIndicator(progress = { animatedProgress })
         Spacer(Modifier.requiredHeight(30.dp))
         Text("Set progress:")
         Slider(
@@ -110,7 +106,7 @@ fun LinearThickWavyProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
 
     val thickStrokeWidth = with(LocalDensity.current) { 8.dp.toPx() }
@@ -160,7 +156,7 @@ fun CircularProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -185,7 +181,7 @@ fun CircularWavyProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -210,7 +206,7 @@ fun CircularThickWavyProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
     val thickStrokeWidth = with(LocalDensity.current) { 8.dp.toPx() }
     val thickStroke =
@@ -257,7 +253,7 @@ fun LegacyLinearProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -266,7 +262,7 @@ fun LegacyLinearProgressIndicatorSample() {
             trackColor = MaterialTheme.colorScheme.surfaceVariant,
             strokeCap = StrokeCap.Butt,
             gapSize = 0.dp,
-            drawStopIndicator = {}
+            drawStopIndicator = {},
         )
         Spacer(Modifier.requiredHeight(30.dp))
         Text("Set progress:")
@@ -286,7 +282,7 @@ fun LegacyIndeterminateLinearProgressIndicatorSample() {
         LinearProgressIndicator(
             trackColor = MaterialTheme.colorScheme.surfaceVariant,
             strokeCap = StrokeCap.Butt,
-            gapSize = 0.dp
+            gapSize = 0.dp,
         )
     }
 }
@@ -298,7 +294,7 @@ fun LegacyCircularProgressIndicatorSample() {
     val animatedProgress by
     animateFloatAsState(
         targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
     )
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -306,7 +302,7 @@ fun LegacyCircularProgressIndicatorSample() {
             progress = { animatedProgress },
             trackColor = Color.Transparent,
             strokeCap = StrokeCap.Butt,
-            gapSize = 0.dp
+            gapSize = 0.dp,
         )
         Spacer(Modifier.requiredHeight(30.dp))
         Text("Set progress:")
@@ -314,7 +310,7 @@ fun LegacyCircularProgressIndicatorSample() {
             modifier = Modifier.width(300.dp),
             value = progress,
             valueRange = 0f..1f,
-            onValueChange = { progress = it }
+            onValueChange = { progress = it },
         )
     }
 }

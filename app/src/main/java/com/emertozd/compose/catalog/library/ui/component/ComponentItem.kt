@@ -34,13 +34,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.emertozd.compose.catalog.R
 import com.emertozd.compose.catalog.library.model.Component
+import com.emertozd.compose.catalog.library.ui.common.ItemBanner
 
 @Composable
-fun ComponentItem(component: Component, onClick: (component: Component) -> Unit) {
+fun ComponentItem(
+    component: Component,
+    markExpressiveComponents: Boolean,
+    onClick: (component: Component) -> Unit
+) {
     OutlinedCard(
         onClick = { onClick(component) },
         modifier = Modifier.height(ComponentItemHeight).padding(ComponentItemOuterPadding)
@@ -78,6 +84,12 @@ fun ComponentItem(component: Component, onClick: (component: Component) -> Unit)
                 )
             }
         }
+        if (markExpressiveComponents && component.hasExpressiveExamples) {
+            ItemBanner(
+                text = "Expr",
+                bannerSize = ComponentItemBannerSize,
+            )
+        }
     }
 }
 
@@ -98,7 +110,8 @@ fun ComponentItemPreview() {
                 examples = listOf(),
                 additionalInfo = "Unofficial"
             ),
-        {}
+        markExpressiveComponents = true,
+        onClick = {}
     )
 }
 
@@ -106,3 +119,4 @@ private val ComponentItemHeight = 180.dp
 private val ComponentItemOuterPadding = 4.dp
 private val ComponentItemInnerPadding = 16.dp
 private val ComponentItemIconSize = 80.dp
+private val ComponentItemBannerSize = 80.dp

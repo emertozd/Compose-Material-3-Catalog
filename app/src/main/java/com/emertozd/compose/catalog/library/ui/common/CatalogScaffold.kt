@@ -58,44 +58,41 @@ fun CatalogScaffold(
     onBackClick: () -> Unit = {},
     favorite: Boolean,
     onFavoriteClick: () -> Unit,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (PaddingValues) -> Unit,
 ) {
-  val context = LocalContext.current
-  val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-  val sheetState = rememberModalBottomSheetState()
-  var openThemePicker by rememberSaveable { mutableStateOf(false) }
+    val context = LocalContext.current
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val sheetState = rememberModalBottomSheetState()
+    var openThemePicker by rememberSaveable { mutableStateOf(false) }
 
-  Scaffold(
-      topBar = {
-        CatalogTopAppBar(
-            title = topBarTitle,
-            showBackNavigationIcon = showBackNavigationIcon,
-            scrollBehavior = scrollBehavior,
-            onBackClick = onBackClick,
-            favorite = favorite,
-            onFavoriteClick = onFavoriteClick,
-            onThemeClick = { openThemePicker = true },
-            onGuidelinesClick = { context.openUrl(guidelinesUrl) },
-            onDocsClick = { context.openUrl(docsUrl) },
-            onSourceClick = { context.openUrl(sourceUrl) },
-            onIssueClick = { context.openUrl(issueUrl) },
-            onTermsClick = { context.openUrl(termsUrl) },
-            onPrivacyClick = { context.openUrl(privacyUrl) },
-            onLicensesClick = { context.openUrl(licensesUrl) })
-      },
-      modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-      content = content)
-
-  if (openThemePicker) {
-    ModalBottomSheet(
-        onDismissRequest = { openThemePicker = false },
-        sheetState = sheetState,
-        content = {
-          ThemePicker(
-              theme = theme,
-              onThemeChange = onThemeChange,
-          )
+    Scaffold(
+        topBar = {
+            CatalogTopAppBar(
+                title = topBarTitle,
+                showBackNavigationIcon = showBackNavigationIcon,
+                scrollBehavior = scrollBehavior,
+                onBackClick = onBackClick,
+                favorite = favorite,
+                onFavoriteClick = onFavoriteClick,
+                onThemeClick = { openThemePicker = true },
+                onGuidelinesClick = { context.openUrl(guidelinesUrl) },
+                onDocsClick = { context.openUrl(docsUrl) },
+                onSourceClick = { context.openUrl(sourceUrl) },
+                onIssueClick = { context.openUrl(issueUrl) },
+                onTermsClick = { context.openUrl(termsUrl) },
+                onPrivacyClick = { context.openUrl(privacyUrl) },
+                onLicensesClick = { context.openUrl(licensesUrl) },
+            )
         },
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        content = content,
     )
-  }
+
+    if (openThemePicker) {
+        ModalBottomSheet(
+            onDismissRequest = { openThemePicker = false },
+            sheetState = sheetState,
+            content = { ThemePicker(theme = theme, onThemeChange = onThemeChange) },
+        )
+    }
 }

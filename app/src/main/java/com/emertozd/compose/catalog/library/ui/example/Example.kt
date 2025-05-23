@@ -23,13 +23,13 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import com.emertozd.compose.catalog.library.model.Component
 import com.emertozd.compose.catalog.library.model.Example
 import com.emertozd.compose.catalog.library.model.Theme
 import com.emertozd.compose.catalog.library.ui.common.CatalogScaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -52,14 +52,14 @@ fun Example(
         onThemeChange = onThemeChange,
         onBackClick = onBackClick,
         favorite = favorite,
-        onFavoriteClick = onFavoriteClick
+        onFavoriteClick = onFavoriteClick,
     ) { paddingValues ->
         Box(
             modifier =
-            Modifier.fillMaxSize()
-                .consumeWindowInsets(WindowInsets.safeDrawing)
-                .padding(paddingValues),
-            contentAlignment = Alignment.Center
+                Modifier.fillMaxSize()
+                    .consumeWindowInsets(WindowInsets.safeDrawing)
+                    .padding(paddingValues),
+            contentAlignment = Alignment.Center,
         ) {
             example.content()
         }
